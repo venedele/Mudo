@@ -64,6 +64,7 @@ namespace Mudo
             Components.Add(ball);
             Components.Add(player);
             Components.Add(player1);
+            Components.Add(wall);
 
             do
             {
@@ -180,12 +181,6 @@ namespace Mudo
             {
                 ball.Collision(player1, true, true);
             }*/
-
-                //ball.Update(gameTime);
-                //player.Update(gameTime);
-                //player1.Update(gameTime);
-
-                wall.coll.Update(gameTime);
             base.Update(gameTime);
         }
 
