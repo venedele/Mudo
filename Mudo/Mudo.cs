@@ -14,6 +14,8 @@ namespace Mudo
         public static Vector2 air_k = new Vector2(-0.0015f, -0.0015f);
         public static float air_rot_k = -0.002f;
 
+        ControlForm controlform;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int defeat1 = 0, defeat2 = 0;
@@ -36,6 +38,8 @@ namespace Mudo
 
             graphics.PreferredBackBufferHeight = 400;
             graphics.PreferredBackBufferWidth = 600;
+
+            controlform = new ControlForm(this);
         }
 
         /// <summary>
@@ -90,6 +94,7 @@ namespace Mudo
         /// </summary>
         protected override void UnloadContent()
         {
+            controlform.Close();
             // TODO: Unload any non ContentManager content here
         }
 
@@ -97,10 +102,43 @@ namespace Mudo
         VObject wall = new Walls(600, 400) { position = new Vector2(300, 200)};
         VObject player;
         VObject player1;
+
+        Point location_prev = new Point(0, 0);
+        bool button_lock = false;
+
+        void SnapControlWindow()
+        {
+            controlform.supressmove = true;
+            controlform.Top = Window.Position.Y;
+            controlform.Left = Window.Position.X + Window.ClientBounds.Width;
+            controlform.supressmove = false;
+        }
+
         protected override void Update(GameTime gameTime)
         {
+            if(location_prev != Window.Position)
+            {
+                location_prev = Window.Position;
+                SnapControlWindow();
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.F))
+            {
+                if (!button_lock)
+                {
+                    if (controlform.Visible)
+                        controlform.Hide();
+                    else
+                    {
+                        controlform.Show();
+                        SnapControlWindow();
+                    }
+                }
+            }
+            button_lock = Keyboard.GetState().IsKeyDown(Keys.F);
+
             Rectangle screen = GraphicsDevice.PresentationParameters.Bounds;
 
             /*if (ball.position.Y - 20 < 0)
@@ -136,12 +174,11 @@ namespace Mudo
                 ball.Collision(player1, true, true);
             }*/
 
-            ball.Update(gameTime);
-            player.Update(gameTime);
-            player1.Update(gameTime);
+                ball.Update(gameTime);
+                player.Update(gameTime);
+                player1.Update(gameTime);
 
-            wall.coll.Update(gameTime);
-
+                wall.coll.Update(gameTime);
             base.Update(gameTime);
         }
 
