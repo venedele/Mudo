@@ -8,7 +8,7 @@ namespace Mudo
         public Animator controller;
 
 
-        public Platform(Animator controller, VObject ball_collision) : base(null, 0, 0)
+        public Platform(Game game, Animator controller, VObject ball_collision) : base(game, null, 0, 0)
         {
             this.controller = controller;
             air_k = new Vector2(-0.1f, 0);

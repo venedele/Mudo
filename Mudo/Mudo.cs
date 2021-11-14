@@ -52,6 +52,19 @@ namespace Mudo
         {
             this.Window.Title = "Mudo 2.0";
 
+            ball = new Ball(this, null, 40, 40) { position = new Vector2(250, 300) };
+            wall = new Walls(this, 600, 400) { position = new Vector2(300, 200) };
+            player = new Platform(this, new Player_An(Keys.A, Keys.D), ball) { position = new Vector2(100, 385) };
+            player1 = new Platform(this, new Ai_An(ball), ball)/*(new Player_An(Keys.Left, Keys.Right))*/ { position = new Vector2(100, 15) };
+
+            wall.coll.Add(player);
+            wall.coll.Add(player1);
+            wall.coll.Add(ball);
+
+            Components.Add(ball);
+            Components.Add(player);
+            Components.Add(player1);
+
             do
             {
                 ball_velocity = new Vector2(r.Next() % 10 - 5, r.Next() % 10 - 5);
@@ -76,15 +89,9 @@ namespace Mudo
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ball.texture = Content.Load<Texture2D>("acc");
 
-            player = new Platform(new Player_An(Keys.A, Keys.D), ball) { position = new Vector2(100, 385) };
             ((Platform)player).setTexture(GraphicsDevice);
-
-            player1 = new Platform(new Ai_An(ball), ball)/*(new Player_An(Keys.Left, Keys.Right))*/ { position = new Vector2(100, 15) };
             ((Platform)player1).setTexture(GraphicsDevice, 1);
 
-            wall.coll.Add(player);
-            wall.coll.Add(player1);
-            wall.coll.Add(ball);
             // TODO: use this.Content to load your game content here
         }
 
@@ -98,8 +105,8 @@ namespace Mudo
             // TODO: Unload any non ContentManager content here
         }
 
-        Ball ball = new Ball(null, 40, 40) { position = new Vector2(250, 300) };
-        VObject wall = new Walls(600, 400) { position = new Vector2(300, 200)};
+        Ball ball;
+        VObject wall;
         VObject player;
         VObject player1;
 
@@ -174,9 +181,9 @@ namespace Mudo
                 ball.Collision(player1, true, true);
             }*/
 
-                ball.Update(gameTime);
-                player.Update(gameTime);
-                player1.Update(gameTime);
+                //ball.Update(gameTime);
+                //player.Update(gameTime);
+                //player1.Update(gameTime);
 
                 wall.coll.Update(gameTime);
             base.Update(gameTime);

@@ -1,9 +1,10 @@
-﻿
+﻿using Microsoft.Xna.Framework;
+
 namespace Mudo
 {
     class Walls : VObject
     {
-        public Walls(int height, int width) : base(null, height, width, true)
+        public Walls(Game game, int height, int width) : base(game, null, height, width, true)
         {
             mass = 9000;
         }

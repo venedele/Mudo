@@ -6,7 +6,7 @@ namespace Mudo
 {
     class Ball : VObject 
     {
-        public Ball(Texture2D texture, int width, int height) : base(texture, width, height)
+        public Ball(Game game, Texture2D texture, int width, int height) : base(game, texture, width, height)
         {
             mass = 10; min_speed = 0;
             rotation_coef = 9f;

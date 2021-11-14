@@ -4,7 +4,7 @@ using System;
 
 namespace Mudo
 {
-    class VObject
+    class VObject : GameComponent
     {
         public float mass = 0.0f;
         protected float rotation_mass = 0.0f;
@@ -41,7 +41,7 @@ namespace Mudo
         public bool container = false;
 
 
-        public VObject(Texture2D texture, int width, int height, bool container = false)
+        public VObject(Game a, Texture2D texture, int width, int height, bool container = false): base(a)
         {
             this.width = width;
             this.height = height;
@@ -118,7 +118,7 @@ namespace Mudo
 
         }
 
-        public virtual void Update(GameTime time)
+        public override void Update(GameTime time)
         {
             if (velocity.Length() > min_speed)
             {
@@ -134,6 +134,7 @@ namespace Mudo
             position += (velocity += acceleration);
 
             coll.Update(time);
+            base.Update(time);
         }
 
         public float LeftX
