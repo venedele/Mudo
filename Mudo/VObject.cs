@@ -51,11 +51,8 @@ namespace Mudo
         }
 
         public void Draw(SpriteBatch draw)
-        {//TODO: Set width and height for 0
-            /*if (width * height == 0)
-                draw.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), 1f, SpriteEffects.None, 1);
-            else*/
-                draw.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 1);
+        {
+            draw.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 1);
         }
 
         public void Collision(VObject collisioned, bool collision_orientation, bool anti_clipping = false)
@@ -70,7 +67,6 @@ namespace Mudo
                 //Full elastic collision: w1 = (m1 - m2)v1/M + 2m2v2/M (Conservation of moment and conservation of kinetic energy) //Non cartisean hits not fully supported
                 new_val = ((this.mass - collisioned.mass) * this.velocity.Y + 2 * collisioned.mass * collisioned.velocity.Y) / (this.mass + collisioned.mass);
                 new_val2 = this.velocity.Y + new_val - collisioned.velocity.Y;
-                //float combined_hit = this.velocity.Y - collisioned.velocity.Y;
                 new_val *= bounce;
                 velocity.Y = new_val;
                 
@@ -94,10 +90,8 @@ namespace Mudo
             {
                 new_val = ((this.mass - collisioned.mass) * this.velocity.X + 2 * collisioned.mass * collisioned.velocity.X) / (this.mass + collisioned.mass);
                 new_val2 = this.velocity.X + new_val - collisioned.velocity.X;
-                //float combined_hit = this.velocity.X - collisioned.velocity.X;
                 new_val *= bounce; //TODO: Get mass ration into equasion
                 velocity.X = new_val;
-                //velocity.X = -velocity.X;
 
                 float direction = new_val > 0 ? -1f : 1f;
                 float combined_speed = velocity.Y + direction * collisioned.velocity.Y;
@@ -114,7 +108,6 @@ namespace Mudo
                     position.X = collisioned.position.X + ((position.X > collisioned.position.X) ? 1 : -1) * ((collisioned.width + this.width) / 2 - (collisioned.container ? this.width : 0));
             }
             if (Math.Abs(velocity.Y) < min_y) velocity.Y = (velocity.Y > 0 ? 1 : -1) * min_y;
-            //rotation_velocity -= direction*(float)Math.Sqrt((old.Length() - velocity.Length()) * 2 / rotation_inertia);
 
         }
 

@@ -74,9 +74,6 @@ namespace Mudo
 
             ball.velocity = ball_velocity;
             ball.rotation_velocity = (float)(r.Next() % 20) / 10.0f - 1;
-
-            //ball.velocity = new Vector2(3.5f, 3.5f);
-
             base.Initialize();
         }
 
@@ -146,41 +143,6 @@ namespace Mudo
                 }
             }
             button_lock = Keyboard.GetState().IsKeyDown(Keys.F);
-
-            Rectangle screen = GraphicsDevice.PresentationParameters.Bounds;
-
-            /*if (ball.position.Y - 20 < 0)
-            {
-                ball.position.Y = 20;
-                ball.Collision(wall, true);
-                defeat1++;
-            }
-            else if (ball.position.Y + 20 > screen.Height)
-            {
-                ball.Collision(wall, true);
-                ball.position.Y = screen.Height - 20;
-                defeat2++;
-            }
-            if (ball.position.X -20 < 0)
-            {
-                ball.position.X = 20;
-                ball.Collision(wall, false);
-            }
-            else if (ball.position.X + 20 > screen.Width)
-            {
-                ball.position.X = screen.Width - 20;
-                ball.Collision(wall, false);
-            }*/
-
-            /*if( ball.position.X > player.position.X - player.texture.Width / 2  && ball.position.X < player.position.X + player.texture.Width/2 && ball.position.Y + ball.height / 2 >= player.position.Y - player.texture.Height / 2)
-            {
-                ball.Collision(player, true, true);
-            }
-
-            if (ball.position.X > player1.position.X - player1.texture.Width / 2 && ball.position.X < player1.position.X + player1.texture.Width / 2 &&  ball.position.Y - ball.height / 2 <= player1.position.Y + player1.texture.Height/2)
-            {
-                ball.Collision(player1, true, true);
-            }*/
             base.Update(gameTime);
         }
 
