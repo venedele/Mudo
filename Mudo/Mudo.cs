@@ -147,9 +147,10 @@ namespace Mudo
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        Color background = new Color(0xf5f5f5);
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(background/*Color.White*/);
 
             spriteBatch.Begin();
 
