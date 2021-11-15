@@ -4,7 +4,7 @@ using System;
 
 namespace Mudo
 {
-    class VObject : GameComponent
+    class VObject : DrawableGameComponent
     {
         public float mass = 0.0f;
         protected float rotation_mass = 0.0f;
@@ -50,9 +50,15 @@ namespace Mudo
             this.container = container;
         }
 
-        public void Draw(SpriteBatch draw)
+        private SpriteBatch spr = null;
+        public override void Draw(GameTime time)
         {
-            draw.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 1);
+            if (texture != null)
+            {
+                if (spr == null)
+                    spr = (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch));
+                spr.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 1);
+            }
         }
 
         public void Collision(VObject collisioned, bool collision_orientation, bool anti_clipping = false)

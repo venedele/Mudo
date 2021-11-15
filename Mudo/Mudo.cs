@@ -61,10 +61,6 @@ namespace Mudo
             wall.coll.Add(player1);
             wall.coll.Add(ball);
 
-            Components.Add(ball);
-            Components.Add(player);
-            Components.Add(player1);
-            Components.Add(wall);
 
             do
             {
@@ -85,6 +81,15 @@ namespace Mudo
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Services.AddService(typeof(SpriteBatch), spriteBatch);
+
+
+            Components.Add(ball);
+            Components.Add(player);
+            Components.Add(player1);
+            Components.Add(wall);
+
+
             ball.texture = Content.Load<Texture2D>("acc");
 
             ((Platform)player).setTexture(GraphicsDevice);
@@ -156,13 +161,9 @@ namespace Mudo
 
             spriteBatch.Begin();
 
-            ball.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-            player1.Draw(spriteBatch);
+            base.Draw(gameTime);
 
             spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }
