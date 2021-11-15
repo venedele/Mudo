@@ -10,14 +10,16 @@ namespace Mudo
     /// </summary>
     public class Mudo : Game
     {
-        public static float ball_mass = 10;
-        public static Vector2 air_k = new Vector2(-0.0015f, -0.0015f);
-        public static float air_rot_k = -0.002f;
-
         ControlForm controlform;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Ball ball;
+        VObject wall;
+        VObject player;
+        VObject player1;
+
         int defeat1 = 0, defeat2 = 0;
         Random r = new Random();
 
@@ -88,14 +90,7 @@ namespace Mudo
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
 
-
-            ball.texture = Content.Load<Texture2D>("acc");
-
             base.LoadContent();
-
-            //((Platform)player).setTexture(GraphicsDevice);
-            //((Platform)player1).setTexture(GraphicsDevice, 1);
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -108,11 +103,6 @@ namespace Mudo
             controlform.Close();
             // TODO: Unload any non ContentManager content here
         }
-
-        Ball ball;
-        VObject wall;
-        VObject player;
-        VObject player1;
 
         Point location_prev = new Point(0, 0);
         bool button_lock = false;

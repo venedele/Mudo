@@ -14,5 +14,11 @@ namespace Mudo
             this.air_rot_k = -0.0015f;
             air_k = new Vector2(-0.0008f, -0.0008f);
         }
+
+        protected override void LoadContent()
+        {
+            texture = Game.Content.Load<Texture2D>("acc");
+            base.LoadContent();
+        }
     }
 }
