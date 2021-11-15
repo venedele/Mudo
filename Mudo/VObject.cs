@@ -28,6 +28,7 @@ namespace Mudo
             get { return width_int == 0 ? texture.Width : width_int; }
             protected set { width_int = value; }
         }
+
         public int height_int;
         public int height
         {

@@ -7,14 +7,22 @@ namespace Mudo
     {
         public Animator controller;
 
+        int texture_variant = 0;
 
-        public Platform(Game game, Animator controller, VObject ball_collision) : base(game, null, 0, 0)
+        public Platform(Game game, Animator controller, VObject ball_collision, int variant = 0) : base(game, null, 0, 0)
         {
             this.controller = controller;
             air_k = new Vector2(-0.1f, 0);
             this.mass = 1000;
             this.bounce = 1.1f;
             this.coll.Add(ball_collision);
+            this.texture_variant = variant;
+        }
+
+        protected override void LoadContent()
+        {
+            this.setTexture(Game.GraphicsDevice, texture_variant);
+            base.LoadContent();
         }
 
         public void setTexture(GraphicsDevice gr, int variant = 0)
@@ -29,7 +37,6 @@ namespace Mudo
             else
                 for (int i = 0; i < data.Length; ++i) if ((i % 10 < 4) || i < 244 || i > 1952) data[i] = Color.Black; else data[i] = Color.Orange;
             this.texture.SetData(data);
-
         }
 
         public override void Update(GameTime time)

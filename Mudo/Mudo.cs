@@ -40,6 +40,21 @@ namespace Mudo
             graphics.PreferredBackBufferWidth = 600;
 
             controlform = new ControlForm(this);
+
+            ball = new Ball(this, null, 40, 40) { position = new Vector2(250, 300) };
+            wall = new Walls(this, 600, 400) { position = new Vector2(300, 200) };
+            player = new Platform(this, new Player_An(Keys.A, Keys.D), ball, 0) { position = new Vector2(100, 385) };
+            player1 = new Platform(this, new Ai_An(ball), ball, 1)/*(new Player_An(Keys.Left, Keys.Right))*/ { position = new Vector2(100, 15) };
+
+            wall.coll.Add(player);
+            wall.coll.Add(player1);
+            wall.coll.Add(ball);
+
+            Components.Add(ball);
+            Components.Add(player);
+            Components.Add(player1);
+            Components.Add(wall);
+
         }
 
         /// <summary>
@@ -51,16 +66,6 @@ namespace Mudo
         protected override void Initialize()
         {
             this.Window.Title = "Mudo 2.0";
-
-            ball = new Ball(this, null, 40, 40) { position = new Vector2(250, 300) };
-            wall = new Walls(this, 600, 400) { position = new Vector2(300, 200) };
-            player = new Platform(this, new Player_An(Keys.A, Keys.D), ball) { position = new Vector2(100, 385) };
-            player1 = new Platform(this, new Ai_An(ball), ball)/*(new Player_An(Keys.Left, Keys.Right))*/ { position = new Vector2(100, 15) };
-
-            wall.coll.Add(player);
-            wall.coll.Add(player1);
-            wall.coll.Add(ball);
-
 
             do
             {
@@ -84,16 +89,12 @@ namespace Mudo
             Services.AddService(typeof(SpriteBatch), spriteBatch);
 
 
-            Components.Add(ball);
-            Components.Add(player);
-            Components.Add(player1);
-            Components.Add(wall);
-
-
             ball.texture = Content.Load<Texture2D>("acc");
 
-            ((Platform)player).setTexture(GraphicsDevice);
-            ((Platform)player1).setTexture(GraphicsDevice, 1);
+            base.LoadContent();
+
+            //((Platform)player).setTexture(GraphicsDevice);
+            //((Platform)player1).setTexture(GraphicsDevice, 1);
 
             // TODO: use this.Content to load your game content here
         }
@@ -126,6 +127,7 @@ namespace Mudo
 
         protected override void Update(GameTime gameTime)
         {
+            Services.GetType();
             if(location_prev != Window.Position)
             {
                 location_prev = Window.Position;
