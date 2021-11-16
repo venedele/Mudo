@@ -26,11 +26,18 @@ namespace Mudo
             base.WndProc(ref m);
         }
 
-        Game parent;
+        Mudo parent;
         protected override bool ShowWithoutActivation => true;
+        public ControlForm(Mudo parent)
+        {
+            this.ControlBox = false;
+            InitializeComponent();
+            this.parent = parent;
 
+        }
 
         public bool supressmove = true;
+
         private void onMove(object sender, EventArgs e)
         {
             if (Visible)
@@ -39,16 +46,6 @@ namespace Mudo
                     parent.Window.Position = new Microsoft.Xna.Framework.Point(Location.X - parent.Window.ClientBounds.Width, Location.Y);
             }
         }
-
-        public ControlForm(Game parent)
-        {
-            this.ControlBox = false;
-            InitializeComponent();
-            this.parent = parent;
-            
-        }
-
-
 
     }
 }

@@ -46,11 +46,14 @@
     <Compile Include="Animator.cs" />
     <Compile Include="Ball.cs" />
     <Compile Include="CollisionEngine.cs" />
-    <Compile Include="ControlForm.cs">
+    <Compile Include="ControlForm\ControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ControlForm.Designer.cs">
+    <Compile Include="ControlForm\ControlForm.Designer.cs">
       <DependentUpon>ControlForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlForm\Page1Controls.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mudo.cs" />
     <Compile Include="Platform.cs" />
@@ -71,7 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ControlForm.resx">
+    <EmbeddedResource Include="ControlForm\ControlForm.resx">
       <DependentUpon>ControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Icon.ico" />

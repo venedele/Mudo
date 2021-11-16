@@ -74,6 +74,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.defeat1 = new System.Windows.Forms.Label();
+            this.defeat2 = new System.Windows.Forms.Label();
             this.tabPage3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -387,6 +389,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.defeat2);
+            this.tabPage1.Controls.Add(this.defeat1);
             this.tabPage1.Controls.Add(this.checkBox2);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.button2);
@@ -554,7 +558,29 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // defeat1
+            // 
+            this.defeat1.AutoSize = true;
+            this.defeat1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defeat1.Location = new System.Drawing.Point(136, 12);
+            this.defeat1.Name = "defeat1";
+            this.defeat1.Size = new System.Drawing.Size(18, 20);
+            this.defeat1.TabIndex = 20;
+            this.defeat1.Text = "0";
+            // 
+            // defeat2
+            // 
+            this.defeat2.AutoSize = true;
+            this.defeat2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defeat2.Location = new System.Drawing.Point(136, 32);
+            this.defeat2.Name = "defeat2";
+            this.defeat2.Size = new System.Drawing.Size(18, 20);
+            this.defeat2.TabIndex = 21;
+            this.defeat2.Text = "0";
             // 
             // ControlForm
             // 
@@ -626,5 +652,7 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label defeat1;
+        private System.Windows.Forms.Label defeat2;
     }
 }
