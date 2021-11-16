@@ -16,11 +16,12 @@ namespace Mudo
         SpriteBatch spriteBatch;
 
         Ball ball;
-        VObject wall;
+        Walls wall;
         VObject player;
         VObject player1;
 
-        int defeat1 = 0, defeat2 = 0;
+        public int defeat1 { get {return ball.defeat1; } }
+        public int defeat2 { get {return ball.defeat2; } }
         Random r = new Random();
 
         // Driving values
@@ -47,6 +48,7 @@ namespace Mudo
             wall = new Walls(this, 600, 400) { position = new Vector2(300, 200) };
             player = new Platform(this, new Player_An(Keys.A, Keys.D), ball, 0) { position = new Vector2(100, 385) };
             player1 = new Platform(this, new Ai_An(ball), ball, 1)/*(new Player_An(Keys.Left, Keys.Right))*/ { position = new Vector2(100, 15) };
+            ball.setScoring(wall, true);
 
             wall.coll.Add(player);
             wall.coll.Add(player1);

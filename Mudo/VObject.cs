@@ -62,7 +62,7 @@ namespace Mudo
             }
         }
 
-        public void Collision(VObject collisioned, bool collision_orientation, bool anti_clipping = false)
+        public virtual void Collision(VObject collisioned, bool collision_orientation, bool anti_clipping = false)
         {
             //TODO: Modify second body attributes
 
