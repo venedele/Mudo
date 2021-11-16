@@ -27,6 +27,16 @@ namespace Mudo
         // Driving values
         Vector2 ball_velocity = new Vector2(0, 0);
 
+        private bool pause = false;
+        public bool Pause { get { return pause; } set { if (pause != value) TogglePause(); } }
+        public void TogglePause()
+        {
+            ball.Enabled = pause;
+            wall.Enabled = pause;
+            player.Enabled = pause;
+            player1.Enabled = pause;
+            pause = !pause;
+        }
 
         public Mudo()
         {
@@ -53,6 +63,8 @@ namespace Mudo
             wall.coll.Add(player);
             wall.coll.Add(player1);
             wall.coll.Add(ball);
+
+            TogglePause();
 
             Components.Add(ball);
             Components.Add(player);
@@ -119,19 +131,19 @@ namespace Mudo
 
         protected override void Update(GameTime gameTime)
         {
-            Services.GetType();
+            KeyboardState keystate = Keyboard.GetState();
             if(location_prev != Window.Position)
             {
                 location_prev = Window.Position;
                 SnapControlWindow();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            if (keystate.IsKeyDown(Keys.Q))
                 Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.F))
-            {
-                if (!button_lock)
+            if (!button_lock)
+                if (keystate.IsKeyDown(Keys.F))
                 {
+
                     if (controlform.Visible)
                         controlform.Hide();
                     else
@@ -139,9 +151,13 @@ namespace Mudo
                         controlform.Show();
                         SnapControlWindow();
                     }
+
+                } else if(keystate.IsKeyDown(Keys.P))
+                {
+                    TogglePause();
                 }
-            }
-            button_lock = Keyboard.GetState().IsKeyDown(Keys.F);
+            button_lock = keystate.IsKeyDown(Keys.F) || keystate.IsKeyDown(Keys.P);
+
             base.Update(gameTime);
         }
 
