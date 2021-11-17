@@ -59,9 +59,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.defeat2 = new System.Windows.Forms.Label();
+            this.defeat1 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.pause = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -74,8 +76,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.defeat1 = new System.Windows.Forms.Label();
-            this.defeat2 = new System.Windows.Forms.Label();
             this.tabPage3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -393,7 +393,7 @@
             this.tabPage1.Controls.Add(this.defeat1);
             this.tabPage1.Controls.Add(this.checkBox2);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.pause);
             this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
@@ -406,6 +406,26 @@
             this.tabPage1.Size = new System.Drawing.Size(294, 251);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
+            // 
+            // defeat2
+            // 
+            this.defeat2.AutoSize = true;
+            this.defeat2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defeat2.Location = new System.Drawing.Point(136, 32);
+            this.defeat2.Name = "defeat2";
+            this.defeat2.Size = new System.Drawing.Size(18, 20);
+            this.defeat2.TabIndex = 21;
+            this.defeat2.Text = "0";
+            // 
+            // defeat1
+            // 
+            this.defeat1.AutoSize = true;
+            this.defeat1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defeat1.Location = new System.Drawing.Point(136, 12);
+            this.defeat1.Name = "defeat1";
+            this.defeat1.Size = new System.Drawing.Size(18, 20);
+            this.defeat1.TabIndex = 20;
+            this.defeat1.Text = "0";
             // 
             // checkBox2
             // 
@@ -428,16 +448,17 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Supercharge 2 timeout: ";
             // 
-            // button2
+            // pause
             // 
-            this.button2.AccessibleName = "button2";
-            this.button2.ForeColor = System.Drawing.Color.Crimson;
-            this.button2.Location = new System.Drawing.Point(96, 70);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(89, 27);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Start";
-            this.button2.UseVisualStyleBackColor = true;
+            this.pause.AccessibleName = "button2";
+            this.pause.ForeColor = System.Drawing.Color.Crimson;
+            this.pause.Location = new System.Drawing.Point(96, 70);
+            this.pause.Name = "pause";
+            this.pause.Size = new System.Drawing.Size(89, 27);
+            this.pause.TabIndex = 17;
+            this.pause.Text = "Start";
+            this.pause.UseVisualStyleBackColor = true;
+            this.pause.Click += new System.EventHandler(this.button2_Click);
             // 
             // checkBox1
             // 
@@ -562,26 +583,6 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // defeat1
-            // 
-            this.defeat1.AutoSize = true;
-            this.defeat1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defeat1.Location = new System.Drawing.Point(136, 12);
-            this.defeat1.Name = "defeat1";
-            this.defeat1.Size = new System.Drawing.Size(18, 20);
-            this.defeat1.TabIndex = 20;
-            this.defeat1.Text = "0";
-            // 
-            // defeat2
-            // 
-            this.defeat2.AutoSize = true;
-            this.defeat2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defeat2.Location = new System.Drawing.Point(136, 32);
-            this.defeat2.Name = "defeat2";
-            this.defeat2.Size = new System.Drawing.Size(18, 20);
-            this.defeat2.TabIndex = 21;
-            this.defeat2.Text = "0";
-            // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -639,7 +640,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button pause;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
