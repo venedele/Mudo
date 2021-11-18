@@ -32,3 +32,6 @@
 /processorParam:TextureFormat=Color
 /build:grunge-circle-frame-2.png;acc.png
 
+#begin pause.xnb
+/copy:pause.xnb
+

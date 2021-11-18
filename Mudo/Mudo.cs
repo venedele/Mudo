@@ -51,6 +51,7 @@ namespace Mudo
 
             graphics.PreferredBackBufferHeight = 400;
             graphics.PreferredBackBufferWidth = 600;
+            graphics.ApplyChanges();
 
             controlform = new ControlForm(this);
 
@@ -73,6 +74,13 @@ namespace Mudo
 
         }
 
+
+        Texture2D pause_t;
+        SpriteFont text_f;
+        int pause_alpha = 195;
+        int screen_width;
+
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -82,6 +90,8 @@ namespace Mudo
         protected override void Initialize()
         {
             this.Window.Title = "Mudo 2.0";
+
+            screen_width = Window.ClientBounds.Width;
 
             do
             {
@@ -103,6 +113,9 @@ namespace Mudo
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
+
+            pause_t = Content.Load<Texture2D>("pause");
+            text_f = Content.Load<SpriteFont>("File");
 
             base.LoadContent();
             // TODO: use this.Content to load your game content here
@@ -158,6 +171,12 @@ namespace Mudo
                 }
             button_lock = keystate.IsKeyDown(Keys.F) || keystate.IsKeyDown(Keys.P);
 
+            int target = (pause ? 195 : -120);
+            if (pause_alpha != target)
+            {
+                pause_alpha += pause_alpha > target ? -15 : 15;
+            }
+
             base.Update(gameTime);
         }
 
@@ -173,7 +192,11 @@ namespace Mudo
             spriteBatch.Begin();
 
             base.Draw(gameTime);
-
+            if (pause_alpha > 0)
+            {
+                spriteBatch.Draw(pause_t, new Rectangle(600 - 5 - 33, 5, 33, 33), new Color(Color.White, pause_alpha));
+                spriteBatch.DrawString(text_f, "Pause On", new Vector2(600-50, 39), new Color(Color.Black, pause_alpha));
+            }
             spriteBatch.End();
         }
     }
