@@ -43,16 +43,6 @@ namespace Mudo
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            this.IsFixedTimeStep = false;
-            this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 30d); //60);
-
-            this.IsMouseVisible = true;
-            this.Window.AllowUserResizing = false;
-
-            graphics.PreferredBackBufferHeight = 400;
-            graphics.PreferredBackBufferWidth = 600;
-            graphics.ApplyChanges();
-
             controlform = new ControlForm(this);
 
             ball = new Ball(this, null, 40, 40) { position = new Vector2(250, 300) };
@@ -79,6 +69,7 @@ namespace Mudo
         SpriteFont text_f;
         int pause_alpha = 195;
         int screen_width;
+        int screen_height;
 
 
         /// <summary>
@@ -90,8 +81,18 @@ namespace Mudo
         protected override void Initialize()
         {
             this.Window.Title = "Mudo 2.0";
+            this.IsFixedTimeStep = false;
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 30d); //60);
+
+            this.IsMouseVisible = true;
+            this.Window.AllowUserResizing = false;
+
+            graphics.PreferredBackBufferHeight = 400;
+            graphics.PreferredBackBufferWidth = 600;
+            graphics.ApplyChanges();
 
             screen_width = Window.ClientBounds.Width;
+            screen_height = Window.ClientBounds.Height;
 
             do
             {
@@ -194,8 +195,8 @@ namespace Mudo
             base.Draw(gameTime);
             if (pause_alpha > 0)
             {
-                spriteBatch.Draw(pause_t, new Rectangle(600 - 5 - 33, 5, 33, 33), new Color(Color.White, pause_alpha));
-                spriteBatch.DrawString(text_f, "Pause On", new Vector2(600-50, 39), new Color(Color.Black, pause_alpha));
+                spriteBatch.Draw(pause_t, new Rectangle(screen_width - 5 - 33, 5, 33, 33), new Color(Color.White, pause_alpha));
+                spriteBatch.DrawString(text_f, "Pause On", new Vector2(screen_width-50, 39), new Color(Color.Black, pause_alpha));
             }
             spriteBatch.End();
         }
