@@ -58,6 +58,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mudo.cs" />
+    <Compile Include="GSocket.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player_An.cs" />
     <Compile Include="VObject.cs" />
