@@ -51,9 +51,45 @@ namespace MonoControls.Containers.Base
         private Point size_c;
         public Point size
         {
-            get { return size_c; }
+            get { return size_c == Point.Zero?texture_c.Bounds.Size:size_c; }
             set { size_c = value; if (event_handler != null) UpdateMouseevent(); foreach (Animatable chi in this) if (chi.event_handler != null) chi.UpdateMouseevent(); UpdateScale(); }
         }
+
+
+        public int width
+        {
+            get { return size.X; }
+            protected set { size_c.X = value; }
+        }
+
+        public int height
+        {
+            get { return size.Y; }
+            protected set { size_c.Y = value; }
+        }
+
+
+        public float Xposition_left
+        {
+            get { return location.X - width / 2.0f; }
+        }
+
+        public float Xposition_right
+        {
+            get { return location.X + width / 2.0f; }
+        }
+
+        public float Yposition_top
+        {
+            get { return location.Y - height / 2.0f; }
+        }
+
+        public float Yposition_bottom
+        {
+            get { return location.Y + height / 2.0f; }
+        }
+
+
         Vector2 sub_location = new Vector2(0, 0);
         Point sub_size = new Point(0, 0);
         private float rotation = 0.0f;
@@ -72,7 +108,7 @@ namespace MonoControls.Containers.Base
             set { location_c.Y = value; if (event_handler != null) UpdateMouseevent(); foreach (Animatable chi in this) if (chi.event_handler != null) chi.UpdateMouseevent(); }
         }
 
-        public float Rotaion
+        public float Rotation
         {
             get { return rotation; }
             set { rotation = value;}
@@ -107,7 +143,7 @@ namespace MonoControls.Containers.Base
         public Animatable (Texture2D texture, float x, float y, int width, int height, Color color, float rotation = 0f, LinkedList<Animatable> parents = null)
         {
             id = new Random().Next();
-            this.texture = texture; location = new Vector2(x, y); size = new Point(width, height); Rotaion = rotation;
+            this.texture = texture; location = new Vector2(x, y); size = new Point(width, height); Rotation = rotation;
             if(parents!=null)foreach (Animatable a in parents)
                 this.AddLast(a.SetParent(this));
             alpha = color.A/(float)255;
@@ -117,7 +153,7 @@ namespace MonoControls.Containers.Base
         public Animatable (Texture2D texture, Vector2 location, Point size, Color color, float rotation = 0, LinkedList<Animatable> parents = null)
         {
             id = new Random().Next();
-            this.texture = texture; this.location = location; this.size = size ; Rotaion = rotation;
+            this.texture = texture; this.location = location; this.size = size ; Rotation = rotation;
             if (parents != null) foreach (Animatable a in parents)
                 { this.AddLast(a.SetParent(this)); }
             alpha = color.A/(float)255;
@@ -158,7 +194,7 @@ namespace MonoControls.Containers.Base
             size = new Point(containerwidth, containerheight);
             if (parents != null) foreach (Animatable a in parents)
                 { this.AddLast(a.SetParent(this)); }
-            alpha = color.A / (float)255; color.A = 255; Rotaion = rotation; this.color = color;
+            alpha = color.A / (float)255; color.A = 255; Rotation = rotation; this.color = color;
         }
 
         public Animatable(SpriteFont spriteFont, String str, float x, float y, Color color, int containerwidth = 0, int containerheight = 0, float rotation = 0, LinkedList<Animatable> parents = null)
@@ -167,7 +203,7 @@ namespace MonoControls.Containers.Base
             size = new Point(containerwidth, containerheight);
             if (parents != null) foreach (Animatable a in parents)
                 { this.AddLast(a.SetParent(this)); }
-            alpha = color.A / (float)255; color.A = 255; Rotaion = rotation; this.color = color;
+            alpha = color.A / (float)255; color.A = 255; Rotation = rotation; this.color = color;
         }
 
         protected Animatable()
@@ -210,6 +246,8 @@ namespace MonoControls.Containers.Base
             return size;
         }
 
+        //TODO: Add the option of getting the Spritebatch from a Game object. Follow DrawableGameComponent
+        //spr = (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch));
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 cord_root)
         {
             drawing.WaitOne();
