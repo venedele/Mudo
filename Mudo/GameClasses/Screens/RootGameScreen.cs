@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoControls.Containers.Base;
 
-namespace Mudo.GameClasses
+namespace Mudo.GameClasses.Screens
 {
     internal class RootGameScreen: Screen
     {
