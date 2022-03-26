@@ -7,24 +7,25 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using MonoControls.Containers.Base;
 using MonoControls.Containers.Helpers.Animatables;
+using Microsoft.Xna.Framework;
 
 namespace MonoControls.Containers.Helpers.Menues
 {
     static class MenuBuilder 
     {
-        public static MenuScreen Build_Interlopated_Back(Menu main, Screen Background, Interlopator a, Queue<Menu> menus = null)
+        public static MenuScreen Build_Interlopated_Back(Game context, Menu main, Screen Background, Interlopator a, Queue<Menu> menus = null)
         {
             Menu[] menu_c = new Menu[1+(menus==null?0:menus.Count)];
             menu_c[0] = main;
             if (menus != null) {
                 menus.CopyTo(menu_c, 1);
             }
-            MenuScreen menu = new MenuScreen(menu_c, a, 0f);
+            MenuScreen menu = new MenuScreen(context, menu_c, a, 0f);
             menu.nested = Background;
             return menu;
         }
 
-        public static MenuScreen Build_Shaped(Menu main, bool mainshaped, Screen background, Interlopator a = null, float alpha = 1, Queue<Pair<Menu,bool>> menus = null)
+        public static MenuScreen Build_Shaped(Game context, Menu main, bool mainshaped, Screen background, Interlopator a = null, float alpha = 1, Queue<Pair<Menu,bool>> menus = null)
         {
             Menu[] menu_c = new Menu[1 + (menus == null ? 0 : menus.Count)];
             menu_c[0] = mainshaped?new MenuShaped(main):main;
@@ -37,7 +38,7 @@ namespace MonoControls.Containers.Helpers.Menues
                     menu_c[x] = temp.b ? new MenuShaped(temp.a) : temp.a;
                 }
             }
-            MenuScreen menu = new MenuScreen(menu_c, a, alpha);
+            MenuScreen menu = new MenuScreen(context, menu_c, a, alpha);
             menu.nested = background;
             return menu;
         }

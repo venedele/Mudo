@@ -14,28 +14,28 @@ namespace MonoControls.Containers.Helpers.Screens
         Animatable background = null;
         String loadneeded = null;
 
-        public SolidBackground(string textureresource, float alpha, GraphicsDevice device)
+        public SolidBackground(Game context, string textureresource, float alpha, GraphicsDevice device) : base(context)
         {
             loadneeded = textureresource;
             background = new Animatable(null, new Vector2(0, 0), new Point(), new Color(Color.White,alpha*255));
-            graphicsDevice = device;
+            //graphicsDevice = device;
         }
 
-        public SolidBackground(Animatable background, GraphicsDevice device)
+        public SolidBackground(Game context, Animatable background, GraphicsDevice device) : base(context)
         {
             this.background = background;
-            graphicsDevice = device;
+            //graphicsDevice = device;
         }
 
-        public SolidBackground(Texture2D back, GraphicsDevice device,  float alpha)
+        public SolidBackground(Game context, Texture2D back, GraphicsDevice device,  float alpha) : base(context)
         {
             background = new Animatable(back, new Vector2(0, 0), new Point(), new Color(Color.White, alpha*255));
-            graphicsDevice = device;
+            //graphicsDevice = device;
         }
 
-        public SolidBackground(Color gradientstart, Color step, GraphicsDevice gr, int gradientresoulution, float alpha = 1, bool vertical = true)
+        public SolidBackground(Game context, Color gradientstart, Color step, GraphicsDevice gr, int gradientresoulution, float alpha = 1, bool vertical = true): base(context)
         {
-            graphicsDevice = gr;
+            //graphicsDevice = gr;
             gradientresoulution *= 10;
             Texture2D back = new Texture2D(gr, vertical ? 10 : gradientresoulution, vertical ? gradientresoulution : 10);
             Color[] data = new Color[back.Width * back.Height];
@@ -56,9 +56,9 @@ namespace MonoControls.Containers.Helpers.Screens
             background = new Animatable(back, new Vector2(0, 0), new Point(), new Color(Color.White, alpha * 255));
         }
 
-        public SolidBackground(Color gradientstart, Color endcolor, int gradientresolution, GraphicsDevice gr, float alpha = 1, bool vertical = true)
+        public SolidBackground(Game context, Color gradientstart, Color endcolor, int gradientresolution, GraphicsDevice gr, float alpha = 1, bool vertical = true) : base(context)
         {
-            graphicsDevice = gr;
+            //graphicsDevice = gr;
             gradientresolution *= 10;
             Vector3 gradientstartv = gradientstart.ToVector3();
             Vector3 step = ((endcolor.ToVector3() - gradientstart.ToVector3()) / gradientresolution);
@@ -86,23 +86,23 @@ namespace MonoControls.Containers.Helpers.Screens
             background = new Animatable(back, new Vector2(0, 0), new Point(), new Color(Color.White, alpha * 255));
         }
 
-        public SolidBackground(Color solidColor, GraphicsDevice device, float alpha)
+        public SolidBackground(Game context, Color solidColor, float alpha) : base(context)
         {
-            Texture2D back = new Texture2D(device, 10, 10);
+            Texture2D back = new Texture2D(graphicsDevice, 10, 10);
             Color[] solid = new Color[10*10];
             for (int x = 0; x < 10 * 10; x++)
                 solid[x] = solidColor;
             back.SetData(solid);
             background = new Animatable(back, new Vector2(0, 0), new Point(), new Color(Color.White, alpha*255));
-            graphicsDevice = device;
+            //graphicsDevice = device;
         }
 
         protected override void Resource_Load(Microsoft.Xna.Framework.Content.ContentManager content_l = null)
         {
             if (background.texture == null)
                 background.texture = content_l.Load<Texture2D>(loadneeded);
-            background.size = (background.texture.Height<background.texture.Width)?new Point((int)((GraphicsDevice.Viewport.Height / (float)background.texture.Height) * background.texture.Width), GraphicsDevice.Viewport.Height):GraphicsDevice.Viewport.Bounds.Size;
-            background.location = new Vector2((GraphicsDevice.Viewport.Width - background.size.X) / 2, 0);
+            background.size = (background.texture.Height<background.texture.Width)?new Point((int)((graphicsDevice.Viewport.Height / (float)background.texture.Height) * background.texture.Width), graphicsDevice.Viewport.Height):graphicsDevice.Viewport.Bounds.Size;
+            background.location = new Vector2((graphicsDevice.Viewport.Width - background.size.X) / 2, 0);
         }
         protected override void Current_Update(GameTime gameTime)
         {
