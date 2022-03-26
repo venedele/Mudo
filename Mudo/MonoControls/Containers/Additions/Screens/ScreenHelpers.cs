@@ -52,11 +52,11 @@ namespace MonoControls.Containers.Helpers.Screens
             return s;
         }
 
-        public static void ForceLoad(Screen queue, Microsoft.Xna.Framework.Content.ContentManager content, Microsoft.Xna.Framework.Graphics.GraphicsDevice gr)
+        public static void ForceLoad(Screen queue)
         {
             while(queue != null)
             {
-                if (!queue.Initialised) queue.Load = new Pair<Microsoft.Xna.Framework.Content.ContentManager, Microsoft.Xna.Framework.Graphics.GraphicsDevice>(content, gr);
+                if (!queue.Initialised) queue.Load();
                 queue = queue.nested;
             }
         }

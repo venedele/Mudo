@@ -15,6 +15,50 @@ namespace MonoControls.Containers.Base
 
         public Screen parent { private set; get; } = null;
 
+        Game context;
+
+        protected Microsoft.Xna.Framework.Content.ContentManager content
+        {
+            get { return context.Content;  }
+        }
+        public GraphicsDevice graphicsDevice
+        {
+            get { return context.GraphicsDevice; }
+        }
+
+
+        //If Context is changed on an initialised object, the object will reaload its resources
+        public Game Context
+        {
+            get { return context; }
+            set { if (value != context)
+                { 
+                  context = value;
+                  if (initialised) {
+                        if (context.GraphicsDevice != null)
+                        {
+                            //Load is not called, as that will try and reload resources on every step of the screen chain
+                            Resource_Load();
+                        }
+                        else initialised = false;
+                  }
+                    if (child != null)
+                        child.Context = context;
+                }
+            }
+        }
+        public void Load()
+        {
+            initialised = true;
+            Resource_Load(context.Content);
+            if (child != null) child.Load();
+        }
+
+        public Screen(Game context)
+        {
+            this.Context = context;
+        }
+
         private bool custom_root_compliable_v = false;
         public bool custom_root_compliable
         {
@@ -52,22 +96,14 @@ namespace MonoControls.Containers.Base
             set { if (initialised ^ (initialised = value)) { if (initialised) { if (child != null) child.Resource_Load(content); Resource_Load(content); } else { if (child != null) child.Dispose();  Dispose(); } }  }
             get { return initialised; }
         }
-        public Pair<Microsoft.Xna.Framework.Content.ContentManager, GraphicsDevice> Load {
-            set { if ((value.a != content || GraphicsDevice!=value.b || !initialised) && value!=null)
-                { graphicsDevice = value.b; content = value.a; initialised = true; if(child!=null)child.Load = value; Resource_Load(content); }  }
-        }
+
         public bool paused = false;
-        protected Microsoft.Xna.Framework.Content.ContentManager content;
-        protected GraphicsDevice GraphicsDevice;
-        public GraphicsDevice graphicsDevice
-        {
-            set { GraphicsDevice = value; }
-        }
+  
         protected Screen child = null;
         public Screen nested
         {
             get { return child; }
-            set { if(child!=null)child.parent = null; child = value; if (child != null) { child.parent = this; if (automaticallyLoadNext && content!=null) child.Load = new Pair<Microsoft.Xna.Framework.Content.ContentManager, GraphicsDevice>(content, GraphicsDevice); } }
+            set { if(child!=null)child.parent = null; child = value; if (child != null) { child.parent = this; child.Context = context;  if (automaticallyLoadNext && !child.initialised) child.Load(); } }
         }
         public Screen Detach()
         {
