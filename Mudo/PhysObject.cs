@@ -31,6 +31,7 @@ namespace Mudo
         {
             coll = new CollisionEngine(this, !container);
             this.container = container;
+            this.setCentralCoords(true);
         }
 
         private SpriteBatch spr = null;

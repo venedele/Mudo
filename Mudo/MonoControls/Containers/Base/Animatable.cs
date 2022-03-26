@@ -72,22 +72,22 @@ namespace MonoControls.Containers.Base
 
         public float Xposition_left
         {
-            get { return location.X - width / 2.0f; }
+            get { return location.X - (this.centerCoords?(width / 2.0f):0); }
         }
 
         public float Xposition_right
         {
-            get { return location.X + width / 2.0f; }
+            get { return location.X + (this.centerCoords ? (width / 2.0f) : 0); }
         }
 
         public float Yposition_top
         {
-            get { return location.Y - height / 2.0f; }
+            get { return location.Y - (this.centerCoords ? height / 2.0f:0); }
         }
 
         public float Yposition_bottom
         {
-            get { return location.Y + height / 2.0f; }
+            get { return location.Y + (this.centerCoords ? height / 2.0f:0); }
         }
 
 
@@ -173,6 +173,16 @@ namespace MonoControls.Containers.Base
         {
             effects = eff;
             return this;
+        }
+
+        private bool centerCoords = false;
+        public bool isCenterCoord
+        {
+            get { return centerCoords; }
+        }
+        public void setCentralCoords(bool center_coords)
+        {
+            centerCoords = center_coords;
         }
 
         public Animatable Add(LinkedList<Animatable> parents)
@@ -261,8 +271,8 @@ namespace MonoControls.Containers.Base
                 if (alpha > 0)
                 {
                     Point temp = (sub_size.X == 0 ? size : sub_size);
-                    Vector2 s = (cord_root + location + sub_location) + new Vector2(temp.X / 2, temp.Y / 2);
-                        spriteBatch.Draw(texture, s, null, color * alpha, rotation, new Vector2(texture.Width / 2, texture.Height / 2),scale, effects, 1f);
+                    Vector2 s = (cord_root + location + sub_location) + (this.centerCoords?Vector2.Zero:new Vector2(temp.X / 2, temp.Y / 2));
+                    spriteBatch.Draw(texture, s, null, color * alpha, rotation, new Vector2(texture.Width / 2, texture.Height / 2),scale, effects, 1f);
                     //spriteBatch.Draw(texture, new Rectangle(s.ToPoint(), temp), null, color*alpha, rotation, new Vector2(texture.Width / 2, texture.Height / 2), effects, 1f);
                 }
             }
@@ -286,7 +296,7 @@ namespace MonoControls.Containers.Base
                 if (alpha > 0)
                 {
                     Point temp = (sub_size.X == 0 ? size : sub_size);
-                    Vector2 s = (cord_root + location + sub_location) + new Vector2(temp.X / 2, temp.Y / 2);
+                    Vector2 s = (cord_root + location + sub_location) + (this.centerCoords ? Vector2.Zero : new Vector2(temp.X / 2, temp.Y / 2));
                     
                         spriteBatch.Draw(texture, s, null, color * (alphal * alpha), rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, effects, 1f);
                     

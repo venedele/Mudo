@@ -202,9 +202,9 @@ namespace Mudo
 
             //TODO: Fix cordinate system for the Animatable
             //Possibly add a "Use centric coordinated field"
-            ball.Draw(spriteBatch, new Vector2(-20, -20));
-            player.Draw(spriteBatch, new Vector2(-62, -10));
-            player1.Draw(spriteBatch, new Vector2(-62, -10));
+            ball.Draw(spriteBatch, Vector2.Zero);
+            player.Draw(spriteBatch, Vector2.Zero);
+            player1.Draw(spriteBatch, Vector2.Zero);
 
 
             base.Draw(gameTime);
