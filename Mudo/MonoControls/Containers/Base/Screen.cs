@@ -93,7 +93,7 @@ namespace MonoControls.Containers.Base
         protected bool initialised = false;
         public bool Initialised
         {
-            set { if (initialised ^ (initialised = value)) { if (initialised) { if (child != null) child.Resource_Load(content); Resource_Load(content); } else { if (child != null) child.Dispose();  Dispose(); } }  }
+            set { if (initialised ^ (initialised = value)) { child.Initialised = initialised;  if (initialised) { Resource_Load(content); } else {  Dispose(); } }  }
             get { return initialised; }
         }
 
@@ -103,7 +103,7 @@ namespace MonoControls.Containers.Base
         public Screen nested
         {
             get { return child; }
-            set { if(child!=null)child.parent = null; child = value; if (child != null) { child.parent = this; child.Context = context;  if (automaticallyLoadNext && !child.initialised) child.Load(); } }
+            set { if(child!=null)child.parent = null; child = value; if (child != null) { child.parent = this; child.Context = context;  if (automaticallyLoadNext && !child.initialised && this.initialised) child.Load(); } }
         }
         public Screen Detach()
         {
