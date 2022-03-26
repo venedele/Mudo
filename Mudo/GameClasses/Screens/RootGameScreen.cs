@@ -19,13 +19,11 @@ namespace Mudo.GameClasses.Screens
         int screen_width;
         int screen_height;
          
-        //ControlForm controlform;
         GameContainer game = null;
 
         public RootGameScreen(Game context) : base(context)
         {
             nested = game = new GameContainer(context);
-            //controlform = new ControlForm(this);
             TogglePause();
         }
 
@@ -49,42 +47,21 @@ namespace Mudo.GameClasses.Screens
         Point location_prev = new Point(0, 0);
         bool button_lock = false;
 
-        /*void SnapControlWindow()
-        {
-            controlform.supressmove = true;
-            controlform.Top = Window.Position.Y;
-            controlform.Left = Window.Position.X + Window.ClientBounds.Width;
-            controlform.supressmove = false;
-        }*/
-
         protected override void Current_Update(GameTime gameTime)
         {
 
-            /*if(location_prev != Window.Position)
+            if(location_prev != context.Window.Position)
             {
-                location_prev = Window.Position;
-                SnapControlWindow();
-            }*/
+                location_prev = context.Window.Position;
+            }
 
             KeyboardState keystate = Keyboard.GetState();
             if (!button_lock)
-                /*if (keystate.IsKeyDown(Keys.F))
-                {
-
-                    if (controlform.Visible)
-                        controlform.Hide();
-                    else
-                    {
-                        controlform.Show();
-                        SnapControlWindow();
-                    }
-
-                } else */
                 if (keystate.IsKeyDown(Keys.P))
                 {
                     TogglePause();
                 }
-            button_lock = /*keystate.IsKeyDown(Keys.F) ||*/ keystate.IsKeyDown(Keys.P);
+            button_lock = keystate.IsKeyDown(Keys.P);
 
             int target = (pause ? 195 : -120);
             if (pause_alpha != target)
@@ -104,7 +81,6 @@ namespace Mudo.GameClasses.Screens
 
         protected override void Dispose()
         {
-            //controlform.Close();
         }
     }
 }

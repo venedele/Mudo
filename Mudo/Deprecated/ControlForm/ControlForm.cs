@@ -28,7 +28,7 @@ namespace Mudo
 
         Mudo parent;
         protected override bool ShowWithoutActivation => true;
-        public ControlForm(Mudo parent)
+        public ControlForm(Mudoz parent)
         {
             this.ControlBox = false;
             InitializeComponent();
