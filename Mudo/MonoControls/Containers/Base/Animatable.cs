@@ -49,7 +49,7 @@ namespace MonoControls.Containers.Base
         private Point size_c;
         public Point size
         {
-            get { return size_c == Point.Zero?texture_c.Bounds.Size:size_c; }
+            get { return (size_c == Point.Zero && texture_c!=null)?texture_c.Bounds.Size:size_c; }
             set { size_c = value; if (event_handler != null) UpdateMouseevent(); foreach (Animatable chi in this) if (chi.event_handler != null) chi.UpdateMouseevent(); UpdateScale(); }
         }
 
