@@ -15,7 +15,7 @@ namespace MonoControls.Containers.Base
 
         public Screen parent { private set; get; } = null;
 
-        Game context;
+        protected Game context;
 
         protected Microsoft.Xna.Framework.Content.ContentManager content
         {
@@ -110,11 +110,13 @@ namespace MonoControls.Containers.Base
             parent = null;
             return this;
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-            if(child!=null)child.Draw(spriteBatch);
+            SpriteBatch spriteBatch = (SpriteBatch)context.Services.GetService(typeof(SpriteBatch));
+            if (child!=null)child.Draw();
             Current_Draw(spriteBatch);
         }
+
         public void Update(GameTime gameTime)
         {
             if (!paused)
