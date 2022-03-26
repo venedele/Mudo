@@ -44,8 +44,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GameClasses\Controllers\Ai_An.cs" />
-    <Compile Include="GameClasses\Controllers\Animator.cs" />
+    <Compile Include="GameClasses\Controllers\Ai_Ctr.cs" />
+    <Compile Include="GameClasses\Controllers\Controller.cs" />
     <Compile Include="GameClasses\Physics\Ball.cs" />
     <Compile Include="GameClasses\Physics\CollisionEngine.cs" />
     <Compile Include="GameClasses\Screens\GameContainer.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="MonoControls\Input\Mouse\Mouse_Event.cs" />
     <Compile Include="Mudo.cs" />
     <Compile Include="GameClasses\Physics\Platform.cs" />
-    <Compile Include="GameClasses\Controllers\Player_An.cs" />
+    <Compile Include="GameClasses\Controllers\Player_Ctr.cs" />
     <Compile Include="GameClasses\Physics\PhysObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

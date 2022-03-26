@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Mudo
 {
-    class Ai_An : Animator
+    class Ai_Ctr : Controller
     {
         Ball follow = null;
-        public Ai_An(Ball follow) {
+        public Ai_Ctr(Ball follow) {
             this.follow = follow;
         }
 

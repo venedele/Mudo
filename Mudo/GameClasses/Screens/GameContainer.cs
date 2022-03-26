@@ -36,8 +36,8 @@ namespace Mudo.GameClasses.Screens
         {
             ball = new Ball(null, 40, 40) { location = new Vector2(250, 300) };
             wall = new Walls(600, 400) { location = new Vector2(300, 200) };
-            player = new Platform(new Player_An(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
-            player1 = new Platform(new Ai_An(ball), ball, 1)/*(new Player_An(Keys.Left, Keys.Right))*/ { location = new Vector2(100, 15) };
+            player = new Platform(new Player_Ctr(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
+            player1 = new Platform(new Ai_Ctr(ball), ball, 1)/*(new Player_Ctr(Keys.Left, Keys.Right))*/ { location = new Vector2(100, 15) };
             ball.setScoring(wall, true);
 
             wall.coll.Add(player);
