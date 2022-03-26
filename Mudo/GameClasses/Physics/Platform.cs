@@ -24,7 +24,6 @@ namespace Mudo
         public void LoadContent(GraphicsDevice gr)
         {
             this.setTexture(gr, texture_variant);
-            //base.LoadContent();
         }
 
         public void setTexture(GraphicsDevice gr, int variant = 0)

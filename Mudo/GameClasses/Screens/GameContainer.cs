@@ -44,8 +44,6 @@ namespace Mudo.GameClasses.Screens
             wall.coll.Add(player1);
             wall.coll.Add(ball);
 
-            //TogglePause();
-
 
             do
             {
@@ -55,8 +53,6 @@ namespace Mudo.GameClasses.Screens
 
             ball.velocity = ball_init_velocity;
             ball.rotation_velocity = (float)(r.Next() % 20) / 10.0f - 1;
-            //base.Initialize();
-
 
         }
 

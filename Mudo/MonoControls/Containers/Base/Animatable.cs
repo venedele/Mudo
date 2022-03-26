@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-/*using System.Linq;
-using System.Text;
-using System.Threading.Tasks;*/
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoControls.Inputs.Mouse;
@@ -257,8 +254,6 @@ namespace MonoControls.Containers.Base
             return size;
         }
 
-        //TODO: Add the option of getting the Spritebatch from a Game object. Follow DrawableGameComponent
-        //spr = (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch));
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 cord_root)
         {
             drawing.WaitOne();
@@ -273,7 +268,6 @@ namespace MonoControls.Containers.Base
                     Point temp = (sub_size.X == 0 ? size : sub_size);
                     Vector2 s = (cord_root + location + sub_location) + (this.centerCoords?Vector2.Zero:new Vector2(temp.X / 2, temp.Y / 2));
                     spriteBatch.Draw(texture, s, null, color * alpha, rotation, new Vector2(texture.Width / 2, texture.Height / 2),scale, effects, 1f);
-                    //spriteBatch.Draw(texture, new Rectangle(s.ToPoint(), temp), null, color*alpha, rotation, new Vector2(texture.Width / 2, texture.Height / 2), effects, 1f);
                 }
             }
             else if (spriteFont != null)
@@ -299,8 +293,6 @@ namespace MonoControls.Containers.Base
                     Vector2 s = (cord_root + location + sub_location) + (this.centerCoords ? Vector2.Zero : new Vector2(temp.X / 2, temp.Y / 2));
                     
                         spriteBatch.Draw(texture, s, null, color * (alphal * alpha), rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, effects, 1f);
-                    
-                    //spriteBatch.Draw(texture, new Rectangle(s.ToPoint(), temp), null, color*(alphal*alpha), rotation, new Vector2(texture.Width / 2, texture.Height / 2), effects, 1f);
                 }
             }
             else if (spriteFont != null)

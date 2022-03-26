@@ -11,8 +11,6 @@ namespace Mudo
         protected float rotation_mass = 0.0f;
         protected Vector2 acceleration = new Vector2(0.0f, 0.0f);
         public Vector2 velocity = new Vector2(0.0f, 0.0f);
-        //public Texture2D texture = null;
-        //protected float rotation = 0.0f;
         public float rotation_velocity = 0.0f;
         protected float rotation_acceleration = 0.0f;
         protected Vector2 air_k = new Vector2(-0.0015f, -0.0015f);
@@ -33,17 +31,6 @@ namespace Mudo
             this.container = container;
             this.setCentralCoords(true);
         }
-
-        private SpriteBatch spr = null;
-        /*public override void Draw(GameTime time)
-        {
-            if (texture != null)
-            {
-                if (spr == null)
-                    spr = (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch));
-                spr.Draw(texture, new Rectangle((int)position.X, (int)position.Y, width, height), null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 1);
-            }
-        }*/
 
         public virtual void Collision(PhysObject collisioned, bool collision_orientation, bool anti_clipping = false)
         {
@@ -120,7 +107,6 @@ namespace Mudo
                 location += (velocity += acceleration);
 
                 coll.Update(time);
-                //base.Update(time);
             }
         }
 
