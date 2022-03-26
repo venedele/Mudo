@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mudo
 {
-    class Platform:VObject
+    class Platform:PhysObject
     {
         public Animator controller;
 
         int texture_variant = 0;
 
-        public Platform(Game game, Animator controller, VObject ball_collision, int variant = 0) : base(game, null, 0, 0)
+        public Platform(Animator controller, PhysObject ball_collision, int variant = 0) : base(null, 0, 0)
         {
             this.controller = controller;
             air_k = new Vector2(-0.1f, 0);
@@ -19,10 +19,11 @@ namespace Mudo
             this.texture_variant = variant;
         }
 
-        protected override void LoadContent()
+        //TODO: Read Ball.cs TODO
+        public void LoadContent(Game g)
         {
-            this.setTexture(Game.GraphicsDevice, texture_variant);
-            base.LoadContent();
+            this.setTexture(g.GraphicsDevice, texture_variant);
+            //base.LoadContent();
         }
 
         public void setTexture(GraphicsDevice gr, int variant = 0)
@@ -41,7 +42,7 @@ namespace Mudo
 
         public override void Update(GameTime time)
         {
-            controller.UpdateAccell(ref acceleration, position, time);
+            controller.UpdateAccell(ref acceleration, location, time);
             base.Update(time);
         }
     }

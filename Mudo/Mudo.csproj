@@ -73,7 +73,7 @@
     <Compile Include="Mudo.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Player_An.cs" />
-    <Compile Include="VObject.cs" />
+    <Compile Include="PhysObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Walls.cs" />

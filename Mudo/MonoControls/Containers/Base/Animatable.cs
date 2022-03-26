@@ -10,6 +10,7 @@ using MonoControls.Inputs.Mouse;
 
 namespace MonoControls.Containers.Base
 {
+    //TODO: Inherit DrawableGameComponent if possible
     class Animatable : LinkedList<Animatable>
     {
 

@@ -4,14 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mudo
 {
-    class Ball : VObject 
+    class Ball : PhysObject
     {
         public int defeat1 { get; private set; } = 0;
         public int defeat2 { get; private set; } = 0;
         private Walls wall_ref = null;
         private bool score_or = false;
 
-        public Ball(Game game, Texture2D texture, int width = 40, int height = 40) : base(game, texture, width, height)
+        public Ball(Texture2D texture, int width = 40, int height = 40) : base(texture, width, height)
         {
             mass = 10; min_speed = 0;
             rotation_coef = 9f;
@@ -26,13 +26,13 @@ namespace Mudo
             score_or = score_orientation;
         }
 
-        protected override void LoadContent()
+        //TODO: LoadContent Temporary executed by main class, until a more leen solution is found
+        public void LoadContent(Game g)
         {
-            texture = Game.Content.Load<Texture2D>("acc");
-            base.LoadContent();
+            texture = g.Content.Load<Texture2D>("acc");
         }
 
-        public override void Collision(VObject collisioned, bool orientation, bool anti_clipping = false)
+        public override void Collision(PhysObject collisioned, bool orientation, bool anti_clipping = false)
         {
             if (Object.ReferenceEquals(collisioned, wall_ref) && orientation == score_or)
             {

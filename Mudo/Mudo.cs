@@ -17,8 +17,8 @@ namespace Mudo
 
         Ball ball;
         Walls wall;
-        VObject player;
-        VObject player1;
+        PhysObject player;
+        PhysObject player1;
 
         public int defeat1 { get {return ball.defeat1; } }
         public int defeat2 { get {return ball.defeat2; } }
@@ -45,10 +45,10 @@ namespace Mudo
 
             controlform = new ControlForm(this);
 
-            ball = new Ball(this, null, 40, 40) { position = new Vector2(250, 300) };
-            wall = new Walls(this, 600, 400) { position = new Vector2(300, 200) };
-            player = new Platform(this, new Player_An(Keys.A, Keys.D), ball, 0) { position = new Vector2(100, 385) };
-            player1 = new Platform(this, new Ai_An(ball), ball, 1)/*(new Player_An(Keys.Left, Keys.Right))*/ { position = new Vector2(100, 15) };
+            ball = new Ball(null, 40, 40) { location = new Vector2(250, 300) };
+            wall = new Walls(600, 400) { location = new Vector2(300, 200) };
+            player = new Platform(new Player_An(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
+            player1 = new Platform(new Ai_An(ball), ball, 1)/*(new Player_An(Keys.Left, Keys.Right))*/ { location = new Vector2(100, 15) };
             ball.setScoring(wall, true);
 
             wall.coll.Add(player);
@@ -57,11 +57,11 @@ namespace Mudo
 
             TogglePause();
 
-            Components.Add(ball);
+            /*Components.Add(ball);
             Components.Add(player);
             Components.Add(player1);
             Components.Add(wall);
-
+            */
         }
 
 
@@ -117,6 +117,9 @@ namespace Mudo
 
             pause_t = Content.Load<Texture2D>("pause");
             text_f = Content.Load<SpriteFont>("File");
+            ball.LoadContent(this);
+            ((Platform)player).LoadContent(this);
+            ((Platform)player1).LoadContent(this);
 
             base.LoadContent();
             // TODO: use this.Content to load your game content here
@@ -178,6 +181,11 @@ namespace Mudo
                 pause_alpha += pause_alpha > target ? -15 : 15;
             }
 
+            ball.Update(gameTime);
+            player.Update(gameTime);
+            player1.Update(gameTime);
+            wall.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -191,6 +199,13 @@ namespace Mudo
             GraphicsDevice.Clear(background/*Color.White*/);
 
             spriteBatch.Begin();
+
+            //TODO: Fix cordinate system for the Animatable
+            //Possibly add a "Use centric coordinated field"
+            ball.Draw(spriteBatch, new Vector2(-20, -20));
+            player.Draw(spriteBatch, new Vector2(-62, -10));
+            player1.Draw(spriteBatch, new Vector2(-62, -10));
+
 
             base.Draw(gameTime);
             if (pause_alpha > 0)

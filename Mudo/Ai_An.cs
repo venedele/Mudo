@@ -16,7 +16,7 @@ namespace Mudo
 
         public void UpdateAccell(ref Vector2 curr, Vector2 position, GameTime time)
         {
-            curr = new Vector2(0.006f*(follow.position.X-position.X), 0);
+            curr = new Vector2(0.006f*(follow.location.X-position.X), 0);
         }
     }
 }

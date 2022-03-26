@@ -69,7 +69,7 @@ namespace MonoControls.Containers.Helpers.Animatables
         {
             this.startoffset = startoffset; this.endoffset = endoffset;
             id = new Random().Next();
-            this.type = type; location = new Vector2(x, y); size = new Point(width, height); this.color = color; this.alpha = color.A / 255; color.A = 255; Rotaion = rotation;
+            this.type = type; location = new Vector2(x, y); size = new Point(width, height); this.color = color; this.alpha = color.A / 255; color.A = 255; Rotation = rotation;
             menu_event = this.AddMouseEvents(null, OnHover);
             foreach (Pair<DuplexStateAnimatable, Func<Animatable, MouseKeys, short>> a in parents)
                 { this.AddLast(a.a.SetParent(this)); size_a += a.a.GetContainerSize(); Mouse_events.Enqueue(a.a.AddMouseEvents(a.b, OnHover)); }
@@ -82,7 +82,7 @@ namespace MonoControls.Containers.Helpers.Animatables
         {
             this.startoffset = startoffset; this.endoffset = endoffset;
             id = new Random().Next();
-            this.type = type; this.location = location; this.size = size; this.color = color; this.alpha = color.A / 255; color.A = 255; Rotaion = rotation;
+            this.type = type; this.location = location; this.size = size; this.color = color; this.alpha = color.A / 255; color.A = 255; Rotation = rotation;
             menu_event = this.AddMouseEvents(null, OnHover);
             foreach (Pair<DuplexStateAnimatable, Func<Animatable, MouseKeys, short>> a in parents)
                 { this.AddLast(a.a.SetParent(this)); size_a += a.a.GetContainerSize(); Mouse_events.Enqueue(a.a.AddMouseEvents(a.b, OnHover)); }
@@ -95,7 +95,7 @@ namespace MonoControls.Containers.Helpers.Animatables
         {
             this.startoffset = startoffset; this.endoffset = endoffset;
             id = new Random().Next();
-            this.type = type; this.location = location; this.size = size; this.color = color; Rotaion = rotation;
+            this.type = type; this.location = location; this.size = size; this.color = color; Rotation = rotation;
             Mouse_events = parents_m;
             menu_event = this.AddMouseEvents(null, OnHover);
             foreach (DuplexStateAnimatable a in parents)
