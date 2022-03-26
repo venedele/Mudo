@@ -93,7 +93,7 @@ namespace MonoControls.Containers.Base
         protected bool initialised = false;
         public bool Initialised
         {
-            set { if (initialised ^ (initialised = value)) { child.Initialised = initialised;  if (initialised) { Resource_Load(content); } else {  Dispose(); } }  }
+            set { if (initialised ^ (initialised = value)) { if(this.child != null) this.child.Initialised = initialised;  if (initialised) { Resource_Load(content); } else {  Dispose(); } }  }
             get { return initialised; }
         }
 
