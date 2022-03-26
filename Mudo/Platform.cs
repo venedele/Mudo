@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Mudo
@@ -20,9 +21,9 @@ namespace Mudo
         }
 
         //TODO: Read Ball.cs TODO
-        public void LoadContent(Game g)
+        public void LoadContent(GraphicsDevice gr)
         {
-            this.setTexture(g.GraphicsDevice, texture_variant);
+            this.setTexture(gr, texture_variant);
             //base.LoadContent();
         }
 

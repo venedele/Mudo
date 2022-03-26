@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Mudo.GameClasses;
 using System;
 
 namespace Mudo
@@ -10,66 +11,20 @@ namespace Mudo
     /// </summary>
     public class Mudo : Game
     {
-        ControlForm controlform;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Ball ball;
-        Walls wall;
-        PhysObject player;
-        PhysObject player1;
-
-        public int defeat1 { get {return ball.defeat1; } }
-        public int defeat2 { get {return ball.defeat2; } }
-        Random r = new Random();
-
-        // Driving values
-        Vector2 ball_velocity = new Vector2(0, 0);
-
-        private bool pause = false;
-        public bool Pause { get { return pause; } set { if (pause != value) TogglePause(); } }
-        public void TogglePause()
-        {
-            ball.Enabled = pause;
-            wall.Enabled = pause;
-            player.Enabled = pause;
-            player1.Enabled = pause;
-            pause = !pause;
-        }
+        RootGameScreen root;
 
         public Mudo()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            controlform = new ControlForm(this);
-
-            ball = new Ball(null, 40, 40) { location = new Vector2(250, 300) };
-            wall = new Walls(600, 400) { location = new Vector2(300, 200) };
-            player = new Platform(new Player_An(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
-            player1 = new Platform(new Ai_An(ball), ball, 1)/*(new Player_An(Keys.Left, Keys.Right))*/ { location = new Vector2(100, 15) };
-            ball.setScoring(wall, true);
-
-            wall.coll.Add(player);
-            wall.coll.Add(player1);
-            wall.coll.Add(ball);
-
-            TogglePause();
-
-            /*Components.Add(ball);
-            Components.Add(player);
-            Components.Add(player1);
-            Components.Add(wall);
-            */
+            root = new RootGameScreen(this); 
         }
 
-
-        Texture2D pause_t;
-        SpriteFont text_f;
-        int pause_alpha = 195;
-        int screen_width;
-        int screen_height;
 
 
         /// <summary>
@@ -90,18 +45,6 @@ namespace Mudo
             graphics.PreferredBackBufferHeight = 400;
             graphics.PreferredBackBufferWidth = 600;
             graphics.ApplyChanges();
-
-            screen_width = Window.ClientBounds.Width;
-            screen_height = Window.ClientBounds.Height;
-
-            do
-            {
-                ball_velocity = new Vector2(r.Next() % 10 - 5, r.Next() % 10 - 5);
-            } while
-           (ball_velocity.Length() == 0 || ball_velocity.Y == 0);
-
-            ball.velocity = ball_velocity;
-            ball.rotation_velocity = (float)(r.Next() % 20) / 10.0f - 1;
             base.Initialize();
         }
 
@@ -115,11 +58,7 @@ namespace Mudo
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Services.AddService(typeof(SpriteBatch), spriteBatch);
 
-            pause_t = Content.Load<Texture2D>("pause");
-            text_f = Content.Load<SpriteFont>("File");
-            ball.LoadContent(this);
-            ((Platform)player).LoadContent(this);
-            ((Platform)player1).LoadContent(this);
+            root.Load();
 
             base.LoadContent();
             // TODO: use this.Content to load your game content here
@@ -131,60 +70,19 @@ namespace Mudo
         /// </summary>
         protected override void UnloadContent()
         {
-            controlform.Close();
+
             // TODO: Unload any non ContentManager content here
-        }
-
-        Point location_prev = new Point(0, 0);
-        bool button_lock = false;
-
-        void SnapControlWindow()
-        {
-            controlform.supressmove = true;
-            controlform.Top = Window.Position.Y;
-            controlform.Left = Window.Position.X + Window.ClientBounds.Width;
-            controlform.supressmove = false;
+            root.Initialised = false;
         }
 
         protected override void Update(GameTime gameTime)
         {
             KeyboardState keystate = Keyboard.GetState();
-            if(location_prev != Window.Position)
-            {
-                location_prev = Window.Position;
-                SnapControlWindow();
-            }
 
             if (keystate.IsKeyDown(Keys.Q))
                 Exit();
-            if (!button_lock)
-                if (keystate.IsKeyDown(Keys.F))
-                {
 
-                    if (controlform.Visible)
-                        controlform.Hide();
-                    else
-                    {
-                        controlform.Show();
-                        SnapControlWindow();
-                    }
-
-                } else if(keystate.IsKeyDown(Keys.P))
-                {
-                    TogglePause();
-                }
-            button_lock = keystate.IsKeyDown(Keys.F) || keystate.IsKeyDown(Keys.P);
-
-            int target = (pause ? 195 : -120);
-            if (pause_alpha != target)
-            {
-                pause_alpha += pause_alpha > target ? -15 : 15;
-            }
-
-            ball.Update(gameTime);
-            player.Update(gameTime);
-            player1.Update(gameTime);
-            wall.Update(gameTime);
+            root.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -202,17 +100,10 @@ namespace Mudo
 
             //TODO: Fix cordinate system for the Animatable
             //Possibly add a "Use centric coordinated field"
-            ball.Draw(spriteBatch, Vector2.Zero);
-            player.Draw(spriteBatch, Vector2.Zero);
-            player1.Draw(spriteBatch, Vector2.Zero);
-
+            root.Draw();
 
             base.Draw(gameTime);
-            if (pause_alpha > 0)
-            {
-                spriteBatch.Draw(pause_t, new Rectangle(screen_width - 5 - 33, 5, 33, 33), new Color(Color.White, pause_alpha));
-                spriteBatch.DrawString(text_f, "Pause On", new Vector2(screen_width-50, 39), new Color(Color.Black, pause_alpha));
-            }
+            
             spriteBatch.End();
         }
     }

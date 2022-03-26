@@ -48,15 +48,8 @@
     <Compile Include="Animator.cs" />
     <Compile Include="Ball.cs" />
     <Compile Include="CollisionEngine.cs" />
-    <Compile Include="ControlForm\ControlForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ControlForm\ControlForm.Designer.cs">
-      <DependentUpon>ControlForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ControlForm\Page1Controls.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="GameClasses\GameContainer.cs" />
+    <Compile Include="GameClasses\RootGameScreen.cs" />
     <Compile Include="MonoControls\Containers\Additions\Animatables\DuplexStateAnimatable.cs" />
     <Compile Include="MonoControls\Containers\Additions\Animatables\Menu.cs" />
     <Compile Include="MonoControls\Containers\Additions\Animatables\MenuShaped.cs" />
@@ -89,9 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ControlForm\ControlForm.resx">
-      <DependentUpon>ControlForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Mudo
@@ -27,9 +28,9 @@ namespace Mudo
         }
 
         //TODO: LoadContent Temporary executed by main class, until a more leen solution is found
-        public void LoadContent(Game g)
+        public void LoadContent(ContentManager g)
         {
-            texture = g.Content.Load<Texture2D>("acc");
+            texture = g.Load<Texture2D>("acc");
         }
 
         public override void Collision(PhysObject collisioned, bool orientation, bool anti_clipping = false)
