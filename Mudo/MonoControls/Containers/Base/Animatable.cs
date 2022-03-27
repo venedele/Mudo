@@ -43,7 +43,7 @@ namespace MonoControls.Containers.Base
             get { return texture_c;  }
             set { texture_c = value; UpdateScale(); }
         }
-        SpriteFont spriteFont = null;
+        protected SpriteFont spriteFont = null;
         public String str = null;
         public Color color;
         private Vector2 location_c;
@@ -279,7 +279,7 @@ namespace MonoControls.Containers.Base
             {
                 Point temp = (sub_size.X == 0 ? size : sub_size);
                 if (alpha > 0)
-                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + new Vector2(temp.X / 2f, temp.Y / 2f), color * alpha, rotation, new Vector2(size.X / 2, size.Y / 2), scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + (this.centerCoords ? Vector2.Zero : new Vector2(temp.X / 2f, temp.Y / 2f)), color * alpha, rotation, new Vector2(size.X / 2, size.Y / 2), scale, SpriteEffects.None, 0f);
             }
             drawing.ReleaseMutex();
         }
@@ -304,7 +304,7 @@ namespace MonoControls.Containers.Base
             {
                 Point temp = (sub_size.X == 0 ? size : sub_size);
                 if (alpha > 0)
-                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + new Vector2(temp.X / 2, temp.Y / 2), color * (alphal * alpha), rotation, new Vector2(size.X / 2, size.Y / 2), scale, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + (this.centerCoords ? Vector2.Zero : new Vector2(temp.X / 2f, temp.Y / 2f)), color * (alphal * alpha), rotation, new Vector2(size.X / 2, size.Y / 2), scale, SpriteEffects.None, 0f);
             }
             drawing.ReleaseMutex();
         }
