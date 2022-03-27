@@ -43,22 +43,20 @@ namespace MonoControls.Containers.Base
             //TODO: Changes speed with targetfps. Workaround: Use desiredfps/targetfps coefficient in order to stabalise. 
         }
 
-        public void Reset(float changeable = 0)
+        public void Reset(float changeable = float.NaN)
         {
             total_ticks = 0;
-            this.changeable = changeable;
-            this.changeable_start = changeable;
+            if (!(changeable != changeable))
+            {
+                this.changeable = changeable;
+                this.changeable_start = changeable;
+            }
             start = -1;
         }
 
         public void SetStartingInterval(double wait_milis)
         {
             this.wait_milis = wait_milis;
-        }
-
-        public void Reset()
-        {
-
         }
 
         public static Interlopator GetPredefined(Predefined interlop, float changeable = 0, double wait_millis = 0, float multiplier = 1, float scale = 1)
