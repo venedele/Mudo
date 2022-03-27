@@ -48,6 +48,7 @@
     <Compile Include="GameClasses\Controllers\Controller.cs" />
     <Compile Include="GameClasses\Physics\Ball.cs" />
     <Compile Include="GameClasses\Physics\CollisionEngine.cs" />
+    <Compile Include="GameClasses\Screens\ScoresScreen.cs" />
     <Compile Include="GameClasses\Screens\GameContainer.cs" />
     <Compile Include="GameClasses\Screens\RootGameScreen.cs" />
     <Compile Include="MonoControls\Containers\Additions\Animatables\DuplexStateAnimatable.cs" />
