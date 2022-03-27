@@ -73,8 +73,8 @@ namespace Mudo.GameClasses.Screens
             strip_S = new Animatable(stripe, new Vector2(0, size.Y / 2f), new Point(size.X, 6), Color.White);
             //strip_S.setCentralCoords(true);
             //strip_S.alpha = 0.1f;
-            score2 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y *0.28f), 1, 0.1f, 0.7f, Color.Black, "0");
-            score1 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y * 0.72f), 1, 0.1f, 0.7f, Color.Black, "0");
+            score2 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y *0.28f), 1, 0.1f, 0.7f, Color.Black, 0.1f, 20,  "0");
+            score1 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y * 0.72f), 1, 0.1f, 0.7f, Color.Black, 0.1f, 20, "0");
             //score2.Y -= score2.size.Y/2;
             //score1.Y -= score1.size.Y/2;
             score2.setCentralCoords(true);

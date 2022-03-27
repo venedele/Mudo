@@ -16,6 +16,8 @@ namespace MonoControls.Containers.Additions.Animatables
         protected float alphascale = 0;
         protected float starting_alpha = 0;
         protected float starting_scale = 0;
+        protected float scalechange = 0;
+        protected float pulsetime = 0; 
         public String str
         {
             get { return base.str; }
@@ -26,7 +28,7 @@ namespace MonoControls.Containers.Additions.Animatables
         }
 
 
-        public PulsingText(SpriteFont font, Vector2 location, float scale, float alpha, float final_alpha, Color color, String initial = "") : base(font, initial, location, color)
+        public PulsingText(SpriteFont font, Vector2 location, float scale, float alpha, float final_alpha, Color color, float scalechange = 0.1f, float pulsetime = 20,  String initial = "") : base(font, initial, location, color)
         {
             Vector2 a = font.MeasureString(initial);
             this.size = a.ToPoint();
@@ -34,9 +36,11 @@ namespace MonoControls.Containers.Additions.Animatables
             this.alpha = alpha;
             this.starting_alpha = alpha;
             this.starting_scale = scale;
+            this.scalechange = scalechange;
+            this.pulsetime = pulsetime;
             alphascale = (final_alpha - alpha);
             anim = new Interlopator(delegate (float t) {
-                float value = -t*(t-20)/100f;
+                float value = -t*(t-pulsetime)/(pulsetime*pulsetime/4);
                 if (value > 0) return value; else return 0;
             });
         }
@@ -50,7 +54,7 @@ namespace MonoControls.Containers.Additions.Animatables
                     this.size = spriteFont.MeasureString(base.str).ToPoint();
                 next = null;
                 float value = anim.Update(time);
-                this.Scale = new Vector2(starting_scale, starting_scale) + new Vector2(starting_scale * 0.1f * value, starting_scale * 0.1f * value);
+                this.Scale = new Vector2(starting_scale, starting_scale) + new Vector2(starting_scale * scalechange * value, starting_scale * scalechange * value);
                 this.alpha = starting_alpha + alphascale * value;
             }
         }
