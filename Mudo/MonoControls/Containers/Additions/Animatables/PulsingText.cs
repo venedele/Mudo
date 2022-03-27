@@ -28,7 +28,6 @@ namespace MonoControls.Containers.Additions.Animatables
 
         public PulsingText(SpriteFont font, Vector2 location, float scale, float alpha, float final_alpha, Color color, String initial = "") : base(font, initial, location, color)
         {
-            this.setCentralCoords(true);
             Vector2 a = font.MeasureString(initial);
             this.size = a.ToPoint();
             this.Scale = new Vector2(scale, scale);

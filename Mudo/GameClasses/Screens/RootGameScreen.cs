@@ -60,6 +60,8 @@ namespace Mudo.GameClasses.Screens
             pause_an.alpha = 195f/255;
             score2 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(screen_width/2f, screen_height/4f), 1, 0.1f, 0.7f, Color.Black, "0");
             score1 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(screen_width / 2f, screen_height * 0.75f), 1, 0.1f, 0.7f, Color.Black, "0");
+            score2.setCentralCoords(true);
+            score1.setCentralCoords(true);
         }
 
         Point location_prev = new Point(0, 0);
