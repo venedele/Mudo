@@ -13,8 +13,13 @@ namespace MonoControls.Containers.Base
 
         public int id;
 
-        private Vector2 scale = new Vector2(0, 0);
+        private Vector2 scale = new Vector2(1, 1);
 
+        public Vector2 Scale
+        {
+            get { return scale; }
+            set { if (texture == null) scale = value; else throw new NotImplementedException("Currently scale changing is not supported for Textured Animatables."); }
+        }
 
         public Mutex drawing = new Mutex();
 
@@ -25,7 +30,7 @@ namespace MonoControls.Containers.Base
                 Point temp = (sub_size.X == 0 ? size : sub_size);
                 scale = new Vector2(temp.X / (float)(texture.Width), temp.Y / (float)(texture.Height));
             }
-            else scale = new Vector2(0f, 0f);
+            else scale = new Vector2(1f, 1f);
         }
 
         public SpriteEffects effects = SpriteEffects.None;
@@ -274,7 +279,7 @@ namespace MonoControls.Containers.Base
             {
                 Point temp = (sub_size.X == 0 ? size : sub_size);
                 if (alpha > 0)
-                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + new Vector2(temp.X / 2f, temp.Y / 2f), color * alpha, rotation, new Vector2(size.X / 2, size.Y / 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + new Vector2(temp.X / 2f, temp.Y / 2f), color * alpha, rotation, new Vector2(size.X / 2, size.Y / 2), scale, SpriteEffects.None, 0f);
             }
             drawing.ReleaseMutex();
         }
@@ -299,7 +304,7 @@ namespace MonoControls.Containers.Base
             {
                 Point temp = (sub_size.X == 0 ? size : sub_size);
                 if (alpha > 0)
-                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + new Vector2(temp.X / 2, temp.Y / 2), color * (alphal * alpha), rotation, new Vector2(size.X / 2, size.Y / 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(spriteFont, str, cord_root + location + sub_location + new Vector2(temp.X / 2, temp.Y / 2), color * (alphal * alpha), rotation, new Vector2(size.X / 2, size.Y / 2), scale, SpriteEffects.None, 0f);
             }
             drawing.ReleaseMutex();
         }
