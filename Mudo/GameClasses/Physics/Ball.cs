@@ -9,6 +9,10 @@ namespace Mudo
     {
         public int defeat1 { get; private set; } = 0;
         public int defeat2 { get; private set; } = 0;
+
+        public event EventHandler Player1DefeatChanged;
+        public event EventHandler Player2DefeatChanged;
+
         private Walls wall_ref = null;
         private bool score_or = false;
 
@@ -38,9 +42,9 @@ namespace Mudo
             if (Object.ReferenceEquals(collisioned, wall_ref) && orientation == score_or)
             {
                 if (orientation)
-                    if (velocity.Y > 0) defeat1++; else defeat2++;
+                    if (velocity.Y > 0) { defeat1++; Player1DefeatChanged?.Invoke(this, null); } else { defeat2++; Player2DefeatChanged?.Invoke(this, null); }
                 else
-                    if (velocity.X > 0) defeat2++; else defeat1++;
+                    if (velocity.X > 0) { defeat2++; Player2DefeatChanged?.Invoke(this, null); } else { defeat1++; Player1DefeatChanged?.Invoke(this, null); }
             }
             base.Collision(collisioned, orientation, anti_clipping);    
         }

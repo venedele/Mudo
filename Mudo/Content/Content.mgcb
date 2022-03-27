@@ -20,6 +20,13 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont
 
+#begin File1.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File1.spritefont
+
 #begin grunge-circle-frame-2.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -19,11 +19,20 @@ namespace Mudo.GameClasses.Screens
         PhysObject player;
         PhysObject player1;
 
-        public int defeat1 { get { return ball.defeat1; } }
-        public int defeat2 { get { return ball.defeat2; } }
+        public int Points2 { get { return ball.defeat1; } }
+        public int Points1 { get { return ball.defeat2; } }
         Random r = new Random();
 
-
+        public event EventHandler Player1PointChanged
+        {
+            add { ball.Player2DefeatChanged += value; }
+            remove { ball.Player2DefeatChanged -= value;  }
+        }
+        public event EventHandler Player2PointChanged
+        {
+            add { ball.Player1DefeatChanged += value; }
+            remove { ball.Player1DefeatChanged -= value; }
+        }
 
         // Driving values
         Vector2 ball_init_velocity = new Vector2(0, 0);
