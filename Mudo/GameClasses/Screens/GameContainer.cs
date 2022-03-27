@@ -46,7 +46,7 @@ namespace Mudo.GameClasses.Screens
             ball = new Ball(null, 40, 40) { location = new Vector2(250, 300) };
             wall = new Walls(600, 400) { location = new Vector2(300, 200) };
             player = new Platform(new Player_Ctr(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
-            player1 = new Platform(new Ai_Ctr(ball), ball, 1)/*(new Player_Ctr(Keys.Left, Keys.Right))*/ { location = new Vector2(100, 15) };
+            player1 = new Platform(new Ai_Ctr(ball), ball, 1) { location = new Vector2(100, 15) };
             ball.setScoring(wall, true);
 
             wall.coll.Add(player);
@@ -65,6 +65,17 @@ namespace Mudo.GameClasses.Screens
 
         }
 
+        public void ToggleMultiplayer()
+        {
+            if(((Platform)player1).controller.GetType() == typeof(Player_Ctr))
+            {
+                ((Platform)player1).controller = new Ai_Ctr(ball);
+            } else
+            {
+                ((Platform)player1).controller = (new Player_Ctr(Keys.Left, Keys.Right));
+            }
+        }
+
         protected override void Resource_Load(ContentManager content_l = null)
         {
             ball.LoadContent(content);
@@ -72,8 +83,17 @@ namespace Mudo.GameClasses.Screens
             ((Platform)player1).LoadContent(graphicsDevice);
         }
 
+        protected bool button_lock = false;
         protected override void Current_Update(GameTime gameTime)
         {
+            KeyboardState keystate = Keyboard.GetState();
+            if (!button_lock)
+                if (keystate.IsKeyDown(Keys.M))
+                {
+                    ToggleMultiplayer();
+                }
+            button_lock = keystate.IsKeyDown(Keys.M);
+
             ball.Update(gameTime);
             player.Update(gameTime);
             player1.Update(gameTime);
