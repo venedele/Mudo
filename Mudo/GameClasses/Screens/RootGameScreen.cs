@@ -13,9 +13,9 @@ namespace Mudo.GameClasses.Screens
 {
     internal class RootGameScreen: Screen
     {
-        Texture2D pause_t;
-        SpriteFont text_f;
-        int pause_alpha = 195;
+
+        Animatable pause_an;
+
         int screen_width;
         int screen_height;
          
@@ -40,8 +40,10 @@ namespace Mudo.GameClasses.Screens
         {
             screen_width = context.Window.ClientBounds.Width;
             screen_height = context.Window.ClientBounds.Height;
-            pause_t = content.Load<Texture2D>("pause");
-            text_f = content.Load<SpriteFont>("File");
+            pause_an = new Animatable(content.Load<Texture2D>("pause"), new Vector2(screen_width - 5 - 32, 5), new Point(32, 32), Color.White);
+            Animatable pause_an_t = new Animatable(content.Load<SpriteFont>("File"), "Pause On", new Vector2(-13, 34), Color.Black);
+            pause_an.AddFirst(pause_an_t);
+            pause_an.alpha = 195f/255;
         }
 
         Point location_prev = new Point(0, 0);
@@ -63,20 +65,17 @@ namespace Mudo.GameClasses.Screens
                 }
             button_lock = keystate.IsKeyDown(Keys.P);
 
-            int target = (pause ? 195 : -120);
-            if (pause_alpha != target)
+            //Replace with an Interlopator if needed
+            float target = (pause ? 195f/255 : -120f/255);
+            if (pause_an.alpha != target)
             {
-                pause_alpha += pause_alpha > target ? -15 : 15;
+                pause_an.alpha += pause_an.alpha > target ? -15f/255 : 15f/255;
             }
         }
 
         protected override void Current_Draw(SpriteBatch spriteBatch)
         {
-            if (pause_alpha > 0)
-            {
-                spriteBatch.Draw(pause_t, new Rectangle(screen_width - 5 - 33, 5, 33, 33), new Color(Color.White, pause_alpha));
-                spriteBatch.DrawString(text_f, "Pause On", new Vector2(screen_width - 50, 39), new Color(Color.Black, pause_alpha));
-            }
+            pause_an.Draw(spriteBatch, customroot);
         }
 
         protected override void Dispose()
