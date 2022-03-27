@@ -37,14 +37,27 @@ namespace Mudo
             texture = g.Load<Texture2D>("acc");
         }
 
+        protected double scoreticks = 0;
+
+        public override void Update(GameTime time)
+        {
+            base.Update(time);
+            scoreticks++;
+        }
+
         public override void Collision(PhysObject collisioned, bool orientation, bool anti_clipping = false)
         {
             if (Object.ReferenceEquals(collisioned, wall_ref) && orientation == score_or)
             {
-                if (orientation)
-                    if (velocity.Y > 0) { defeat1++; Player1DefeatChanged?.Invoke(this, null); } else { defeat2++; Player2DefeatChanged?.Invoke(this, null); }
-                else
-                    if (velocity.X > 0) { defeat2++; Player2DefeatChanged?.Invoke(this, null); } else { defeat1++; Player1DefeatChanged?.Invoke(this, null); }
+                if (scoreticks > 10)
+                {
+                    if (orientation)
+                        if (velocity.Y > 0) { defeat1++; Player1DefeatChanged?.Invoke(this, null); } else { defeat2++; Player2DefeatChanged?.Invoke(this, null); }
+                    else
+                        if (velocity.X > 0) { defeat2++; Player2DefeatChanged?.Invoke(this, null); } else { defeat1++; Player1DefeatChanged?.Invoke(this, null); }
+
+                }
+                scoreticks = 0;
             }
             base.Collision(collisioned, orientation, anti_clipping);    
         }
