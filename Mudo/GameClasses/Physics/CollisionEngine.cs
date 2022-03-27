@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Mudo
 {
-    class CollisionEngine : List<VObject>
+    class CollisionEngine : List<PhysObject>
     {
 
         private bool insidecollision = true;
-        public CollisionEngine(VObject main, bool insidecollision = true) : base()
+        public CollisionEngine(PhysObject main, bool insidecollision = true) : base()
         {
             this.Add(main);
             this.insidecollision = insidecollision;
@@ -21,10 +21,10 @@ namespace Mudo
         {
             if (this.Count > 1)
             {
-                VObject main = this.First();
+                PhysObject main = this.First();
                 bool movingx = main.velocity.X != 0;
                 bool movingy = main.velocity.Y != 0;
-                foreach (VObject curr in this.Skip(1))
+                foreach (PhysObject curr in this.Skip(1))
                 {
                     bool movx = movingx || curr.velocity.X != 0;
                     bool movy = movingy || curr.velocity.Y != 0;
@@ -34,12 +34,12 @@ namespace Mudo
                         //Collision specifically designed for balls
                         if (insidecollision)
                         {
-                            if ((main.RightX >= curr.LeftX && main.LeftX <= curr.RightX) && (curr.position.Y >= main.TopY && curr.position.Y <= main.BottomY))
+                            if ((main.Xposition_right >= curr.Xposition_left && main.Xposition_left <= curr.Xposition_right) && (curr.location.Y >= main.Yposition_top && curr.location.Y <= main.Yposition_bottom))
                             {
                                 curr.Collision(main, false, true);
                             }
                         } else {
-                            if((main.LeftX >= curr.LeftX || main.RightX <= curr.RightX))
+                            if((main.Xposition_left >= curr.Xposition_left || main.Xposition_right <= curr.Xposition_right))
                             {
                                 curr.Collision(main, false, true);
                             }
@@ -49,13 +49,13 @@ namespace Mudo
                     {
                         if (insidecollision)
                         {
-                            if ((main.BottomY >= curr.TopY && main.TopY <= curr.BottomY) && (curr.position.X >= main.LeftX && curr.position.X <= main.RightX))
+                            if ((main.Yposition_bottom >= curr.Yposition_top && main.Yposition_top <= curr.Yposition_bottom) && (curr.location.X >= main.Xposition_left && curr.location.X <= main.Xposition_right))
                             {
                                 curr.Collision(main, true, true);
                             }
                         } else
                         {
-                            if ((main.TopY >= curr.TopY || main.BottomY <= curr.BottomY))
+                            if ((main.Yposition_top >= curr.Yposition_top || main.Yposition_bottom <= curr.Yposition_bottom))
                             {
                                 curr.Collision(main, true, true);
                             }

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Mudo
 {
-    interface Animator
+    interface Controller
     {
         void UpdateAccell(ref Vector2 curr, Vector2 position, GameTime time);
     }

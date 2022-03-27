@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Mudo
 {
-    class Player_An: Animator
+    class Player_Ctr: Controller
     {
         private Keys left, right;
-        public Player_An(Keys left, Keys right)
+        public Player_Ctr(Keys left, Keys right)
         {
             this.left = left;
             this.right = right;

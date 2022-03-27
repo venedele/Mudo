@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Mudo
 {
-    class Ai_An : Animator
+    class Ai_Ctr : Controller
     {
         Ball follow = null;
-        public Ai_An(Ball follow) {
+        public Ai_Ctr(Ball follow) {
             this.follow = follow;
         }
 
         public void UpdateAccell(ref Vector2 curr, Vector2 position, GameTime time)
         {
-            curr = new Vector2(0.006f*(follow.position.X-position.X), 0);
+            curr = new Vector2(0.006f*(follow.location.X-position.X), 0);
         }
     }
 }

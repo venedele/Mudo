@@ -44,26 +44,34 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Ai_An.cs" />
-    <Compile Include="Animator.cs" />
-    <Compile Include="Ball.cs" />
-    <Compile Include="CollisionEngine.cs" />
-    <Compile Include="ControlForm\ControlForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ControlForm\ControlForm.Designer.cs">
-      <DependentUpon>ControlForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ControlForm\Page1Controls.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="GameClasses\Controllers\Ai_Ctr.cs" />
+    <Compile Include="GameClasses\Controllers\Controller.cs" />
+    <Compile Include="GameClasses\Physics\Ball.cs" />
+    <Compile Include="GameClasses\Physics\CollisionEngine.cs" />
+    <Compile Include="GameClasses\Screens\ScoresScreen.cs" />
+    <Compile Include="GameClasses\Screens\GameContainer.cs" />
+    <Compile Include="GameClasses\Screens\RootGameScreen.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Animatables\DuplexStateAnimatable.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Animatables\Menu.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Animatables\MenuShaped.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Animatables\PulsingText.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Menues\MenuBuilder.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Menues\MenuScreen.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Screens\ScreenHelpers.cs" />
+    <Compile Include="MonoControls\Containers\Additions\Screens\SolidBackground.cs" />
+    <Compile Include="MonoControls\Containers\Base\Animatable.cs" />
+    <Compile Include="MonoControls\Containers\Base\Groups.cs" />
+    <Compile Include="MonoControls\Containers\Base\Interlopator.cs" />
+    <Compile Include="MonoControls\Containers\Base\Screen.cs" />
+    <Compile Include="MonoControls\Input\Mouse\Mouse.cs" />
+    <Compile Include="MonoControls\Input\Mouse\Mouse_Event.cs" />
     <Compile Include="Mudo.cs" />
-    <Compile Include="Platform.cs" />
-    <Compile Include="Player_An.cs" />
-    <Compile Include="VObject.cs" />
+    <Compile Include="GameClasses\Physics\Platform.cs" />
+    <Compile Include="GameClasses\Controllers\Player_Ctr.cs" />
+    <Compile Include="GameClasses\Physics\PhysObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Walls.cs" />
+    <Compile Include="GameClasses\Physics\Walls.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=3.8.0.1641, Culture=neutral, processorArchitecture=MSIL">
@@ -76,9 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ControlForm\ControlForm.resx">
-      <DependentUpon>ControlForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
@@ -87,6 +92,9 @@
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Inputs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets" Condition="Exists('..\packages\MonoGame.Framework.DesktopGL.3.8.0.1641\build\MonoGame.Framework.DesktopGL.targets')" />
