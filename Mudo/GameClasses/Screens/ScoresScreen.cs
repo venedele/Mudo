@@ -60,24 +60,25 @@ namespace Mudo.GameClasses.Screens
                 for (int x = 0; x < size.X; x++)
                     if ((x+8) / 13 % 2 == 1)
                     {
+                        float alpha_fade = x > (0.65f * size.X) ? 1 - (x - 0.65f * size.X) * 0.01f : 1f;
                         if (y == 0 || y == 5 || x == 0 || x == size.X - 1)
-                            data[x + y * size.X] = 0.25f*Color.Black;
+                            data[x + y * size.X] = alpha_fade*0.09f*Color.Black;
                         else 
-                            data[x + y * size.X] = 0.1f*Color.Black;
+                            data[x + y * size.X] = alpha_fade*0.15f*Color.Black;
                     }
-                    else data[x + y * size.X] = 0.1f*Color.White;
+                    else data[x + y * size.X] = 0.12f*Color.White;
             }
 
             stripe.SetData(data);
             strip_S = new Animatable(stripe, new Vector2(0, size.Y / 2f), new Point(size.X, 6), Color.White);
             //strip_S.setCentralCoords(true);
             //strip_S.alpha = 0.1f;
-            score2 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(7, size.Y *0.28f), 1, 0.1f, 0.7f, Color.Black, "0");
-            score1 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(7, size.Y * 0.72f), 1, 0.1f, 0.7f, Color.Black, "0");
-            score2.Y -= score2.size.Y/2;
-            score1.Y -= score1.size.Y/2;
-            //score2.setCentralCoords(true);
-            //score1.setCentralCoords(true);
+            score2 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y *0.28f), 1, 0.1f, 0.7f, Color.Black, "0");
+            score1 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y * 0.72f), 1, 0.1f, 0.7f, Color.Black, "0");
+            //score2.Y -= score2.size.Y/2;
+            //score1.Y -= score1.size.Y/2;
+            score2.setCentralCoords(true);
+            score1.setCentralCoords(true);
         }
 
         protected override void Current_Update(GameTime gameTime)
