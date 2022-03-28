@@ -50,8 +50,6 @@ namespace Mudo.GameClasses.Screens
             pause_an.alpha = 195f/255;
 
             score.setSize(new Point(150, screen_height));
-            score.Load();
-
         }
 
         Point location_prev = new Point(0, 0);
