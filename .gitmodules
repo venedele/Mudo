@@ -1,0 +1,3 @@
+[submodule "MonoControls"]
+	path = MonoControls
+	url = git@github.com:venedele/MonoControls.git
