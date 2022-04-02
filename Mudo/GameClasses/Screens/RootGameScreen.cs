@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoControls.Containers.Additions;
 using MonoControls.Containers.Additions.Animatables;
 using MonoControls.Containers.Base;
 
@@ -22,12 +23,12 @@ namespace Mudo.GameClasses.Screens
          
         GameContainer game = null;
         ScoresScreen score = null;
+        InterpolAnimatable multiplayer_alert; 
 
         public RootGameScreen(Game context) : base(context)
         {
             nested = game = new GameContainer(context);
             game.nested = score = new ScoresScreen(context, game);
-            //score.customroot = 
             TogglePause();
         }
 
@@ -48,6 +49,21 @@ namespace Mudo.GameClasses.Screens
             Animatable pause_an_t = new Animatable(content.Load<SpriteFont>("File"), "Pause On", new Vector2(-13, 34), Color.Black);
             pause_an.AddFirst(pause_an_t);
             pause_an.alpha = 195f/255;
+
+            multiplayer_alert = new InterpolAnimatable(content.Load<Texture2D>("back"), new Vector2(screen_width -170, 5), new Point(80, 30), Color.White*0);
+            multiplayer_alert.Add(new Animatable(content.Load<SpriteFont>("File"), "Multiplayer off", new Vector2(6, 9), Color.White));
+            multiplayer_alert.First.Value.Scale = new Vector2(1.05f, 1.05f);
+            multiplayer_alert.setAutoReset(true);
+            //multiplayer_alert.setCentralCoords(true);
+
+            multiplayer_alert.setInterpolators(new Interpolator(delegate (float x)
+            {
+                if (x < 10) return x * x / 100;
+                else if (x < 50) return 1;
+                else if (x < 61) return -(x - 50) * (x - 50)/100 + 1;
+                return Interpolator.DONE;
+            }, 0, 5, 1, 1), null, null);
+            
 
             score.setSize(new Point(150, screen_height));
         }
@@ -73,9 +89,14 @@ namespace Mudo.GameClasses.Screens
                 if(keystate.IsKeyDown(Keys.M))
                 {
                     game.ToggleMultiplayer();
+                    if (game.multiplayer) multiplayer_alert.First.Value.str = "Multiplayer on";
+                    else multiplayer_alert.First.Value.str = "Multiplayer off";
+                    multiplayer_alert.StartAnimation();
                 }
             }
             button_lock = keystate.IsKeyDown(Keys.P) || keystate.IsKeyDown(Keys.M);
+
+            multiplayer_alert.Update(gameTime);
 
             //Replace with an Interlopator if needed
             float target = (pause ? 195f/255 : -120f/255);
@@ -88,6 +109,7 @@ namespace Mudo.GameClasses.Screens
         protected override void Current_Draw(SpriteBatch spriteBatch)
         {
             pause_an.Draw(spriteBatch, customroot);
+            multiplayer_alert.Draw(spriteBatch, customroot);
         }
 
         protected override void Dispose()

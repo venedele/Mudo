@@ -26,28 +26,34 @@
 
   <ItemGroup>
 	<ContentWithTargetPath Include="Content\bin\DesktopGL\acc.xnb">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		<TargetPath>Content\acc.xnb</TargetPath>
 	</ContentWithTargetPath>  
     <None Include="Content\bin\DesktopGL\Content\acc.xnb" />
 
 	<ContentWithTargetPath Include="Content\bin\DesktopGL\File.xnb">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		<TargetPath>Content\File.xnb</TargetPath>
 	</ContentWithTargetPath>
 	<None Include="Content\bin\DesktopGL\Content\File.xnb" />
 
 	<ContentWithTargetPath Include="Content\bin\DesktopGL\File1.xnb">
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		<TargetPath>Content\File1.xnb</TargetPath>
 	</ContentWithTargetPath>
 	<None Include="Content\bin\DesktopGL\Content\File1.xnb" />
 
 	<ContentWithTargetPath Include="Content\bin\DesktopGL\pause.xnb">
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		<TargetPath>Content\pause.xnb</TargetPath>
 	</ContentWithTargetPath>
 	<None Include="Content\bin\DesktopGL\pause.xnb" />
+
+	  <ContentWithTargetPath Include="Content\bin\DesktopGL\back.xnb">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		  <TargetPath>Content\back.xnb</TargetPath>
+	  </ContentWithTargetPath>
+	  <None Include="Content\bin\DesktopGL\back.xnb" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,6 +19,10 @@ namespace Mudo.GameClasses.Screens
         PhysObject player;
         PhysObject player1;
 
+        public bool multiplayer
+        {
+            get { return !(((Platform)player1).controller.GetType().Equals(typeof(Ai_Ctr))); }
+        }
         public int Points2 { get { return ball.defeat1; } }
         public int Points1 { get { return ball.defeat2; } }
         Random r = new Random();
