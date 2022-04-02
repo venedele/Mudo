@@ -65,11 +65,17 @@ namespace Mudo.GameClasses.Screens
 
             KeyboardState keystate = Keyboard.GetState();
             if (!button_lock)
+            {
                 if (keystate.IsKeyDown(Keys.P))
                 {
                     TogglePause();
                 }
-            button_lock = keystate.IsKeyDown(Keys.P);
+                if(keystate.IsKeyDown(Keys.M))
+                {
+                    game.ToggleMultiplayer();
+                }
+            }
+            button_lock = keystate.IsKeyDown(Keys.P) || keystate.IsKeyDown(Keys.M);
 
             //Replace with an Interlopator if needed
             float target = (pause ? 195f/255 : -120f/255);

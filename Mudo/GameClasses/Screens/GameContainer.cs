@@ -86,14 +86,6 @@ namespace Mudo.GameClasses.Screens
         protected bool button_lock = false;
         protected override void Current_Update(GameTime gameTime)
         {
-            KeyboardState keystate = Keyboard.GetState();
-            if (!button_lock)
-                if (keystate.IsKeyDown(Keys.M))
-                {
-                    ToggleMultiplayer();
-                }
-            button_lock = keystate.IsKeyDown(Keys.M);
-
             ball.Update(gameTime);
             player.Update(gameTime);
             player1.Update(gameTime);
