@@ -35,7 +35,7 @@ namespace Mudo
         /// </summary>
         protected override void Initialize()
         {
-            this.Window.Title = "Mudo 2.0";
+            this.Window.Title = "Mudo 2.1";
             this.IsFixedTimeStep = false;
             this.TargetElapsedTime = TimeSpan.FromSeconds(1d / 30d); //60);
 

@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+	<Authors>venedele</Authors>
+	<Version>2.1</Version>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
