@@ -51,7 +51,7 @@ namespace Mudo.GameClasses.Screens
             pause_an.alpha = 195f/255;
 
             multiplayer_alert = new InterpolAnimatable(content.Load<Texture2D>("back"), new Vector2(screen_width -170, 5), new Point(80, 30), Color.White*0);
-            multiplayer_alert.Add(new Animatable(content.Load<SpriteFont>("File"), "Multiplayer off", new Vector2(6, 9), Color.White));
+            multiplayer_alert.Add(new Animatable(content.Load<SpriteFont>("File3"), "Multiplayer off", new Vector2(6, 9), Color.White));
             multiplayer_alert.First.Value.Scale = new Vector2(1.05f, 1.05f);
             multiplayer_alert.setAutoReset(true);
             //multiplayer_alert.setCentralCoords(true);
