@@ -19,6 +19,10 @@ namespace Mudo.GameClasses.Screens
         PhysObject player;
         PhysObject player1;
 
+        public bool multiplayer
+        {
+            get { return !(((Platform)player1).controller.GetType().Equals(typeof(Ai_Ctr))); }
+        }
         public int Points2 { get { return ball.defeat1; } }
         public int Points1 { get { return ball.defeat2; } }
         Random r = new Random();
@@ -43,10 +47,10 @@ namespace Mudo.GameClasses.Screens
 
         public GameContainer(Game context) : base(context)
         {
-            ball = new Ball(null, 40, 40) { location = new Vector2(250, 300) };
+            ball = new Ball(context, 40, 40) { location = new Vector2(250, 300) };
             wall = new Walls(600, 400) { location = new Vector2(300, 200) };
-            player = new Platform(new Player_Ctr(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
-            player1 = new Platform(new Ai_Ctr(ball), ball, 1)/*(new Player_Ctr(Keys.Left, Keys.Right))*/ { location = new Vector2(100, 15) };
+            player = new Platform(context, new Player_Ctr(Keys.A, Keys.D), ball, 0) { location = new Vector2(100, 385) };
+            player1 = new Platform(context, new Ai_Ctr(ball), ball, 1) { location = new Vector2(100, 15) };
             ball.setScoring(wall, true);
 
             wall.coll.Add(player);
@@ -65,13 +69,25 @@ namespace Mudo.GameClasses.Screens
 
         }
 
-        protected override void Resource_Load(ContentManager content_l = null)
+        public void ToggleMultiplayer()
         {
-            ball.LoadContent(content);
-            ((Platform)player).LoadContent(graphicsDevice);
-            ((Platform)player1).LoadContent(graphicsDevice);
+            if(((Platform)player1).controller.GetType() == typeof(Player_Ctr))
+            {
+                ((Platform)player1).controller = new Ai_Ctr(ball);
+            } else
+            {
+                ((Platform)player1).controller = (new Player_Ctr(Keys.Left, Keys.Right));
+            }
         }
 
+        protected override void Resource_Load(ContentManager content_l = null)
+        {
+            ball.Load();
+            ((Platform)player).Load();
+            ((Platform)player1).Load();
+        }
+
+        protected bool button_lock = false;
         protected override void Current_Update(GameTime gameTime)
         {
             ball.Update(gameTime);

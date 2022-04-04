@@ -10,7 +10,7 @@ namespace Mudo
 
         int texture_variant = 0;
 
-        public Platform(Controller controller, PhysObject ball_collision, int variant = 0) : base(null, 0, 0)
+        public Platform(Game context, Controller controller, PhysObject ball_collision, int variant = 0) : base(context, 0, 0)
         {
             this.controller = controller;
             air_k = new Vector2(-0.1f, 0);
@@ -21,9 +21,9 @@ namespace Mudo
         }
 
         //TODO: Read Ball.cs TODO
-        public void LoadContent(GraphicsDevice gr)
+        protected override void LoadContent(ContentManager content)
         {
-            this.setTexture(gr, texture_variant);
+            this.setTexture(context.GraphicsDevice, texture_variant);
         }
 
         public void setTexture(GraphicsDevice gr, int variant = 0)

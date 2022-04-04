@@ -16,7 +16,7 @@ namespace Mudo
         private Walls wall_ref = null;
         private bool score_or = false;
 
-        public Ball(Texture2D texture, int width = 40, int height = 40) : base(texture, width, height)
+        public Ball(Game context, int width = 40, int height = 40) : base(context, width, height)
         {
             mass = 10; min_speed = 0;
             rotation_coef = 9f;
@@ -32,7 +32,7 @@ namespace Mudo
         }
 
         //TODO: LoadContent Temporary executed by main class, until a more leen solution is found
-        public void LoadContent(ContentManager g)
+        protected override void LoadContent(ContentManager g)
         {
             texture = g.Load<Texture2D>("acc");
         }
@@ -41,8 +41,8 @@ namespace Mudo
 
         public override void Update(GameTime time)
         {
-            base.Update(time);
             scoreticks++;
+            base.Update(time);
         }
 
         public override void Collision(PhysObject collisioned, bool orientation, bool anti_clipping = false)

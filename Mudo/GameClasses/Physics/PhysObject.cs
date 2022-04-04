@@ -5,7 +5,7 @@ using MonoControls.Containers.Base;
 
 namespace Mudo
 {
-    class PhysObject : Animatable
+    class PhysObject : AdvancedAnimatable
     {
         public float mass = 0.0f;
         protected float rotation_mass = 0.0f;
@@ -25,8 +25,9 @@ namespace Mudo
         public bool container = false;
 
 
-        public PhysObject(Texture2D texture, int width, int height, bool container = false): base(texture, 0, 0, width, height, Color.White)
+        public PhysObject(Game context, int width, int height, bool container = false, Texture2D texture = null) : base(context, new Vector2(0, 0), new Point(width, height), Color.White)
         {
+            this.texture = texture;
             coll = new CollisionEngine(this, !container);
             this.container = container;
             this.setCentralCoords(true);
@@ -89,7 +90,7 @@ namespace Mudo
         }
 
         public bool Enabled = true;
-        public virtual void Update(GameTime time)
+        public override void Update(GameTime time)
         {
             if (Enabled)
             {
@@ -108,6 +109,7 @@ namespace Mudo
 
                 coll.Update(time);
             }
+            base.Update(time);
         }
 
     }
