@@ -77,8 +77,8 @@ namespace Mudo.GameClasses.Screens
             score1 = new PulsingText(content.Load<SpriteFont>("File1"), new Vector2(size.X/2f, size.Y * 0.72f), 1, 0.1f, 0.7f, Color.Black, 0.1f, 20, "0");
             //score2.Y -= score2.size.Y/2;
             //score1.Y -= score1.size.Y/2;
-            score2.setCentralCoords(true);
-            score1.setCentralCoords(true);
+            score2.setCenterCoord(true);
+            score1.setCenterCoord(true);
         }
 
         protected override void Current_Update(GameTime gameTime)

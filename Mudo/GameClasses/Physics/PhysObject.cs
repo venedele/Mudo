@@ -30,7 +30,7 @@ namespace Mudo
             this.texture = texture;
             coll = new CollisionEngine(this, !container);
             this.container = container;
-            this.setCentralCoords(true);
+            this.setCenterCoord(true);
         }
 
         public virtual void Collision(PhysObject collisioned, bool collision_orientation, bool anti_clipping = false)
